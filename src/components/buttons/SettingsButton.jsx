@@ -1,12 +1,11 @@
 /* Reusable SettingsButton component */
 import React from "react";
-import {StyleSheet, TouchableOpacity, Image} from "react-native";
-
-const settingsImage = require('../../assets/images/settings.png')
+import Ionicons from '@expo/vector-icons/Ionicons';
+import {StyleSheet, TouchableOpacity} from "react-native";
 
 const SettingsButton = () => (
     <TouchableOpacity style={styles.container}>
-        <Image source = {settingsImage}/>
+        <Ionicons name="settings-sharp" size={52}/>
     </TouchableOpacity>)
 
 const styles = StyleSheet.create({ 
