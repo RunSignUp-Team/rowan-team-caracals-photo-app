@@ -1,9 +1,5 @@
 import React from 'react';
-import Login from './src/pages/Login';
-// import Homepage from './src/pages/Homepage';
-// import Starting from './src/pages/Starting';
-import Gallery from './src/pages/Gallery';
-// import * as Pages from './src/pages';
+import * as Pages from './pages.js';
 import { useFonts } from 'expo-font';
 
 export default function App() {
@@ -16,9 +12,6 @@ export default function App() {
   }
 
   return (
-    //  <Login></Login> // Display the login page
-    //  <Homepage></Homepage> // Display the Home page
-    <Gallery></Gallery> // Display the Gallery page
-    // <Starting></Starting> // Display the Starting page
+    <Pages.Gallery></Pages.Gallery> // Display any page
   );
 }
