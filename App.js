@@ -1,6 +1,6 @@
 import React from 'react';
-import Login from './src/pages/Login';
-// import Homepage from './src/pages/Homepage';
+import Homepage from './src/pages/Homepage';
+//import Login from './src/pages/Login';
 // import Starting from './src/pages/Starting';
 import Gallery from './src/pages/Gallery';
 // import * as Pages from './src/pages';
@@ -16,9 +16,9 @@ export default function App() {
   }
 
   return (
-    //  <Login></Login> // Display the login page
-    //  <Homepage></Homepage> // Display the Home page
-    <Gallery></Gallery> // Display the Gallery page
-    // <Starting></Starting> // Display the Starting page
+     // <Login></Login> // Display the login page
+     <Homepage></Homepage> // Display the Home page
+    //<Gallery></Gallery> // Display the Gallery page
+     //<Starting></Starting> // Display the Starting page
   );
 }
