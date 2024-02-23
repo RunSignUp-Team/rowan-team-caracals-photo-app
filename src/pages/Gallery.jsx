@@ -2,13 +2,14 @@ import React from "react";
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
 import BasicButton from "../components/buttons/BasicButton/BasicButton";
 import SettingsButton from "../components/buttons/SettingsButton";
+import HomeButton from "../components/buttons/HomePageButton";
 import { COLORS } from "../styles/colors";
 
 const Gallery = () => {
     return(
         <View style = {styles.container}>
             <View style = {styles.home_button}>
-                <BasicButton title={'Home'} fontFamily={'SF-Pro-Text-Bold'}></BasicButton>
+                <HomeButton></HomeButton>
             </View>
             <View style = {styles.settings_button}>
                 <SettingsButton></SettingsButton>

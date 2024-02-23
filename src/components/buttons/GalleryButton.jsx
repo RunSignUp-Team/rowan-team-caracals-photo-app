@@ -1,7 +1,6 @@
 import React from "react";
-import {StyleSheet, TouchableOpacity, Image} from "react-native";
-import Gallery from '../../pages/Gallery';
-const GalleryImage = require('../../assets/images/icons8-gallery-50.png');
+import {StyleSheet, TouchableOpacity} from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 const SendToGallery = () => (
     <Gallery></Gallery>
@@ -9,7 +8,7 @@ const SendToGallery = () => (
 
 const GalleryPageButton = () => (
     <TouchableOpacity style={styles.container}>
-            <Image source = {GalleryImage} onClick={SendToGallery}/>
+        <Ionicons name="images" size={52} onClick={SendToGallery}/>
     </TouchableOpacity>
     
 )
