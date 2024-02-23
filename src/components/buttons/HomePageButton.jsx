@@ -1,16 +1,15 @@
 import React from "react";
-import {StyleSheet, TouchableOpacity, Image} from "react-native";
-import Homepage from '../../../src/pages/Homepage';
+import {StyleSheet, TouchableOpacity} from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
-const homeImage = require('../../assets/images/icons8-home-50.png')
 
 const SendHome = () => (
-    <Homepage></Homepage>
+    <Pages.HomePage></Pages.HomePage>
 )
 
 const HomePageButton = () => (
     <TouchableOpacity style={styles.container}>
-            <Image source = {homeImage} onClick={SendHome}/>
+        <Ionicons name="home-sharp" size={52} onClick={SendHome}/>
     </TouchableOpacity>
     
 )
