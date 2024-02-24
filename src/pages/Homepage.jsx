@@ -78,21 +78,21 @@ const styles = StyleSheet.create({
         height: 190,
         justifyContent: 'center',
         alignItems: 'center',
-        top: '-26%'
+        top: '-22%'
     },
     textLogo: {
-        width: 150,
-        height: 150,
+        width: 160,
+        height: 160,
         resizeMode: 'contain',
         position: "absolute",
-        top: 0,
-        left: 5
+        top: -8,
+        left: 15
 
     },
     welcomeText: {
         alignItems: 'center',
         fontSize: 35,
-        top: -190
+        top: -170
     },
     galleryButton: {
         position: 'absolute',
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     statusButton: {
         position: 'absolute',
-        top: 56,
+        top: 57,
         right: 70,
         padding: 2,
         borderRadius: 1
