@@ -6,14 +6,16 @@ import { FontAwesome } from '@expo/vector-icons';
 import logoImage from "../assets/brand/logo-circle.png";
 import logoText from "../assets/brand/logo-text.png";
 import GalleryPageButtonChange from "../components/buttons/GalleryButtonChanged";
+import StatusButton from "../components/buttons/StatusButton";
+import CameraButton from "../components/buttons/CameraButton";
 
 
 
 const Homepage = () => {
     return (
         <SafeAreaView style={styles.container}>
-            <TouchableOpacity style = {styles.button}>
-                <FontAwesome name="cog" size={32} color="black" />
+            <TouchableOpacity style = {styles.settingsButton}>
+                <FontAwesome name="cog" size={33} color="black" />
             </TouchableOpacity>
             <Image
                 style={styles.circleLogo}
@@ -21,14 +23,21 @@ const Homepage = () => {
             <Image
                 style={styles.textLogo}
                 source={logoText}/>
-
-            <Text style={styles.welcomeText}>Welcome, Bruce!</Text>
-        <View style={styles.bottomLayer}>
-            <GalleryPageButtonChange
-                size={42}
+            <StatusButton
+                size={38}
                 color="black"
-                style={styles.galleryButton} />
-        </View>
+                style={styles.statusButton} />
+            <Text style={styles.welcomeText}>Welcome, Bruce!</Text>
+            <View style={styles.line} />
+
+            <View style={styles.bottomLayer}>
+                 <GalleryPageButtonChange
+                     size={42}
+                        color="black"
+                     style={styles.galleryButton} />
+
+
+            </View>
 
             <StatusBar style="auto" />
         </SafeAreaView>
@@ -56,17 +65,17 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    button: {
+    settingsButton: {
         position: 'absolute',
-        top: 49,
-        right: 15,
-        padding: 10,
-        borderRadius: 5,
+        top: 54,
+        right: 20,
+       padding: 2,
+        borderRadius: 1,
 
     },
     circleLogo: {
-        width: 175,
-        height: 175,
+        width: 190,
+        height: 190,
         justifyContent: 'center',
         alignItems: 'center',
         top: '-26%'
@@ -90,6 +99,22 @@ const styles = StyleSheet.create({
         bottom: 20,
         left: 90,
     },
+    statusButton: {
+        position: 'absolute',
+        top: 56,
+        right: 70,
+        padding: 2,
+        borderRadius: 1
+
+
+    },
+    line: {
+        position: 'absolute',
+        top: 111,
+        width: '100%',
+        height: 1.2,
+        backgroundColor: 'black',
+    }
 
 
 });
