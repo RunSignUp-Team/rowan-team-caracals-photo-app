@@ -4,15 +4,19 @@ import {
     StyleSheet,
     TouchableOpacity,
     Text } from "react-native";
-import { COLORS } from "../../../styles/colors";
+import { COLORS } from "../../constants/Colors";
 
-const BasicButton = ({ title, fontFamily }) => (
-    <TouchableOpacity style={styles.container}>
-    <Text 
-        style={[styles.text, 
-        {fontFamily: fontFamily}]}>
-        {title} </Text>
-    </TouchableOpacity>)
+const BasicButton = ({ title, fontFamily, onPress }) => {
+    return (
+        <TouchableOpacity style={styles.container} onPress={onPress}>
+            <Text 
+                style={[styles.text, 
+                {fontFamily: fontFamily}]}>
+                {title}
+            </Text>
+        </TouchableOpacity>
+    );
+};
 
 const styles = StyleSheet.create({ 
     container: {
@@ -28,5 +32,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         padding: 0
     }
-})
-export default BasicButton
+});
+
+export default BasicButton;
+

@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInput, Text, SafeAreaView, StyleSheet } from 'react-native'
-import { COLORS } from "../styles/colors";
+import { COLORS } from "../constants/Colors";
 
 const BasicTextInput = ({title}) => {
     const [text, onChangeText] = React.useState();

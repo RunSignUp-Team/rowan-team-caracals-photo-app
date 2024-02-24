@@ -3,9 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import {StyleSheet, Text, TouchableHighlight, View} from 'react-native';
 //import Ionicons from '@expo/vector-icons/Ionicons';
 import { FontAwesome } from '@expo/vector-icons';
-import Login from "./Login";
-import GalleryPageButton from "../components/buttons/GalleryButton";
-
+import { router } from "expo-router";
+import GalleryPageButton from "../../components/buttons/GalleryButton";
 
 const Homepage = () => {
     return (
@@ -16,10 +15,6 @@ const Homepage = () => {
             <StatusBar style="auto" />
             <GalleryPageButton></GalleryPageButton>
         </View>
-
-
-
-
     );
 }
 

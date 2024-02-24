@@ -1,15 +1,18 @@
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
-import BasicButton from "../components/buttons/BasicButton/BasicButton";
-import SettingsButton from "../components/buttons/SettingsButton";
-import HomeButton from "../components/buttons/HomePageButton";
-import { COLORS } from "../styles/colors";
+import BasicButton from "../../components/buttons/BasicButton";
+import SettingsButton from "../../components/buttons/SettingsButton";
+import { COLORS } from "../../constants/Colors";
+import { router } from "expo-router";
+const goToHomePage = () => {
+    router.navigate('pages/Homepage');
+  };
 
 const Gallery = () => {
     return(
         <View style = {styles.container}>
             <View style = {styles.home_button}>
-                <HomeButton></HomeButton>
+                <BasicButton title={'Home'} fontFamily={'SF-Pro-Text-Bold'} onPress={goToHomePage}></BasicButton>
             </View>
             <View style = {styles.settings_button}>
                 <SettingsButton></SettingsButton>

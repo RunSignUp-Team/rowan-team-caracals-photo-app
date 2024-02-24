@@ -15,3 +15,4 @@ export default function App() {
     <Pages.Gallery></Pages.Gallery> // Display any page
   );
 }
+

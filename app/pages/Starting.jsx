@@ -1,18 +1,23 @@
 /* Structure fot Starting page to be built up by components */
 import React from "react";
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
-import BasicButton from "../components/buttons/BasicButton/BasicButton";
-import { COLORS } from "../styles/colors";
+import BasicButton from "../../components/buttons/BasicButton";
+import { COLORS } from "../../constants/Colors";
+import { useNavigation, router} from "expo-router";
 
  // TODO: Fix inconsistancy between iOS and Android BasicButton button location
-const logoImage = require('../assets/brand/logo-circle.png')
+const logoImage = require('../../assets/brand/logo-circle.png')
 const Starting = () => {
+    const goToLoginPage = () => {
+      router.navigate('pages/Login');
+    };
     return (
         <View style={styles.container}>
             <Image
                 style={styles.logoMedium}
                 source={logoImage}/>
-            <BasicButton title={'Log-in'} fontFamily={'SF-Pro-Text-Bold'}></BasicButton>
+            <BasicButton title={'Log-in'} fontFamily={'SF-Pro-Text-Bold'}
+                        onPress={goToLoginPage}></BasicButton>
         </View>
     );}
 

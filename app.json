@@ -2,12 +2,13 @@
   "expo": {
     "name": "media-app",
     "slug": "media-app",
+    "scheme": "media-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./src/assets/brand/logo-text.png",
+    "icon": "./assets/brand/logo-text.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./src/assets/brand/logo-text.png",
+      "image": "./assets/brand/logo-text.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -19,15 +20,17 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./src/assets/brand/logo-circle.png",
+        "foregroundImage": "./assets/brand/logo-circle.png",
         "backgroundColor": "#ffffff"
       }
     },
     "web": {
-      "favicon": "./src/assets/brand/logo-circle.png"
+      "favicon": "./assets/brand/logo-circle.png",
+      "bundler": "metro"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-router"
     ]
   }
 }
