@@ -2,17 +2,21 @@ import React from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { FontAwesome5 } from '@expo/vector-icons';
 import Gallery from '../../pages/Gallery';
-
-const SendToGallery = () => (
-    <Gallery></Gallery>
-);
+import { useNavigation } from '@react-navigation/native'
 
 
-const GalleryPageButtonChange = ({ size, color, style }) => (
-    <TouchableOpacity style={[style, { width: size, height: size }]} onPress={SendToGallery}>
+
+
+const GalleryPageButtonChange = ({ size, color, style }) => {
+    
+    const navigation = useNavigation(); 
+
+   return (
+   <TouchableOpacity style={[style, { width: size, height: size }]} onPress={ () =>  navigation.navigate('Gallery')}>
         <FontAwesome5 name="images" size={size * 0.8} color={color} />
     </TouchableOpacity>
-)
+    ); 
+}; 
 
 const styles = StyleSheet.create({
     container: {

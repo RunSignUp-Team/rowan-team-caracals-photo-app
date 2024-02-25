@@ -1,24 +1,28 @@
+import 'react-native-gesture-handler'; 
 import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import Homepage from './src/pages/Homepage';
-//import Login from './src/pages/Login';
-// import Starting from './src/pages/Starting';
 import Gallery from './src/pages/Gallery';
-// import * as Pages from './src/pages';
-import { useFonts } from 'expo-font';
+const Stack = createStackNavigator(); 
 
-export default function App() {
-  // Hook for loading fonts into project
-  const [loaded] = useFonts({
-    'SF-Pro-Text-Bold': require('./src/assets/fonts/SF-Pro-Text-Bold.otf'),
-  });
-  if (!loaded) {
-    return null;
-  }
-
+const App = () => {
   return (
-     // <Login></Login> // Display the login page
-     <Homepage></Homepage> // Display the Home page
-    //<Gallery></Gallery> // Display the Gallery page
-     //<Starting></Starting> // Display the Starting page
-  );
-}
+    <NavigationContainer>
+      <Stack.Navigator  screenOptions={{headerShown: false}}>
+        <Stack.Screen 
+          name="Home" 
+          component={Homepage} 
+         
+        />
+        <Stack.Screen 
+          name="Gallery" 
+          component={Gallery} 
+          
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  ); 
+}; 
+
+export default App;

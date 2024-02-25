@@ -8,6 +8,7 @@ import logoText from "../assets/brand/logo-text.png";
 import GalleryPageButtonChange from "../components/buttons/GalleryButtonChanged";
 import StatusButton from "../components/buttons/StatusButton";
 import CameraButton from "../components/buttons/CameraButton";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -27,14 +28,14 @@ const Homepage = () => {
                 size={38}
                 color="black"
                 style={styles.statusButton} />
-            <Text style={styles.welcomeText}>Welcome, Bruce!</Text>
+            <Text style={styles.welcomeText}>Testing</Text>
             <View style={styles.line} />
 
             <View style={styles.bottomLayer}>
                  <GalleryPageButtonChange
-                     size={42}
+                        size={42}
                         color="black"
-                     style={styles.galleryButton} />
+                        style={styles.galleryButton} />
 
 
             </View>
