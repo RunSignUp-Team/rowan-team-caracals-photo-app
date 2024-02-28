@@ -3,8 +3,8 @@ import React from "react";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import {StyleSheet, TouchableOpacity} from "react-native";
 
-const SettingsButton = () => (
-    <TouchableOpacity style={styles.container}>
+const SettingsButton = ({onPress}) => (
+    <TouchableOpacity style={styles.container} onPress={onPress}>
         <Ionicons name="settings-sharp" size={30}/>
     </TouchableOpacity>)
 

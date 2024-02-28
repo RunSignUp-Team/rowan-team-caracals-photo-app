@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from 'react'; 
 //import Ionicons from '@expo/vector-icons/Ionicons';
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from "expo-router";
@@ -7,6 +7,8 @@ import StatusButton from "../../components/buttons/StatusButton";
 import { StatusBar } from 'expo-status-bar';
 import {Image, StyleSheet, Text, TouchableHighlight, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import SettingsButton from "../../components/buttons/SettingsButton";
+import SettingsModal from '../../components/modals/SettingsModal'
+
 import { COLORS } from "../../constants/Colors";
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -15,13 +17,22 @@ import { COLORS } from "../../constants/Colors";
 const logoImage = require('../../assets/brand/logo-circle.png')
 const logoText = require('../../assets/brand/logo-text.png')
 
+
+
 const Homepage = () => {
+    const [modalVisible, setModalVisible] = useState(false);
     return (
         <SafeAreaView style={styles.container}>
             
             <View style = {styles.settings_button}>
-                <SettingsButton></SettingsButton>
+                <SettingsButton onPress={() => setModalVisible(true)}/>
             </View>
+            <SettingsModal
+                 visible= {modalVisible}
+                 onClose={() => setModalVisible(false)}
+                 title="Settings">
+                <Text></Text>
+            </SettingsModal>
            <StatusButton
                 size={38}
                 color="black"
