@@ -16,13 +16,21 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+      "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
+      "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
+      },
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/brand/logo-circle.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ],
     },
     "web": {
       "favicon": "./assets/brand/logo-circle.png",
@@ -31,6 +39,12 @@
     "plugins": [
       "expo-font",
       "expo-router"
+    ],
+    [
+      "expo-camera",
+      {
+         "cameraPermission": "Allow $(PRODUCT_NAME) to access your Camera."
+       }
     ]
   }
 }
