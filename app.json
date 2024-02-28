@@ -20,7 +20,7 @@
       "infoPlist": {
       "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
       "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
-      },
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +30,7 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ],
+      ]
     },
     "web": {
       "favicon": "./assets/brand/logo-circle.png",
@@ -40,11 +40,11 @@
       "expo-font",
       "expo-router"
     ],
-    [
-      "expo-camera",
+    
+      "expo-camera":
       {
          "cameraPermission": "Allow $(PRODUCT_NAME) to access your Camera."
        }
-    ]
+    
   }
 }

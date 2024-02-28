@@ -1,16 +1,16 @@
 import React from "react";
 import {StyleSheet, TouchableOpacity} from "react-native";
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { AntDesign } from '@expo/vector-icons';
 import { router } from "expo-router";
 
 const SendToCamera = () => (
-    router.navigate('pages/CameraPage')
-   
+   // router.navigate('pages/Gallery')
+   console.log("Live Pressed")
 )
 
 const CameraPageButton = ({ size, color, style }) => (
     <TouchableOpacity style={[style, { width: size, height: size }]} onPress={SendToCamera}>
-        <Ionicons name="camera" size={size * 0.8} color={color} />
+        <AntDesign name="youtube" size={size * 0.8} color={color} />
     </TouchableOpacity>
 )
 

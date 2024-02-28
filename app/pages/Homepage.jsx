@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { FontAwesome } from '@expo/vector-icons';
 import { router } from "expo-router";
 import GalleryPageButton from "../../components/buttons/GalleryButton";
+import LiveStreamButton from "../../components/buttons/LiveStreamButton";
 import StatusButton from "../../components/buttons/StatusButton";
 import { StatusBar } from 'expo-status-bar';
 import {Image, StyleSheet, Text, TouchableHighlight, SafeAreaView, View, TouchableOpacity} from 'react-native';
@@ -10,6 +11,7 @@ import SettingsButton from "../../components/buttons/SettingsButton";
 import SettingsModal from '../../components/modals/SettingsModal'
 
 import { COLORS } from "../../constants/Colors";
+import CameraPageButton from '../../components/buttons/CameraButton';
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
 
@@ -55,6 +57,16 @@ const Homepage = () => {
                      size={42}
                         color="black"
                      style={styles.galleryButton} />
+
+                <CameraPageButton
+                    size={46}
+                    color="black"
+                    style = {styles.cameraButton} />
+
+                <LiveStreamButton
+                    size={46}
+                    color="black"
+                    style = {styles.liveButton} />
             </View>
 
         
@@ -115,7 +127,17 @@ const styles = StyleSheet.create({
     galleryButton: {
         position: 'absolute',
         bottom: 20,
-        left: 90,
+        left: 85,
+    },
+    cameraButton: {
+        position: 'absolute', 
+        bottom: 18,
+        left: 210,
+    },
+    liveButton: {
+        position: 'absolute',
+        bottom: 18,
+        left: 300,
     },
     statusButton: {
         position: 'absolute',
