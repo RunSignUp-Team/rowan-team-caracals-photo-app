@@ -66,11 +66,11 @@ const CameraPage = () => {
                 justifyContent: 'space-between',
                 paddingHorizontal: 50,
             }}>
-                <CameraButton title={"Re-take"} icon="retweet" onPress={() => setImage(null)}/>
-                <CameraButton title={"Save"} icon="check" onPress={saveImage}/>
+                <MutableCamButton title={"Re-take"} icon="retweet" onPress={() => setImage(null)}/>
+                <MutableCamButton title={"Save"} icon="check" onPress={saveImage}/>
             </View>
             :
-            <CameraButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
+            <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
         }
         </View>
         </View>
