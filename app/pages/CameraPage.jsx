@@ -2,7 +2,7 @@ import React, {useState, useEffect, useRef} from 'react';
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
 import {Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
-import CameraButton from '../components/buttons/CameraButton'
+import MutableCamButton from '../components/buttons/MutableCamButton'
 
 const CameraPage = () => {
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
