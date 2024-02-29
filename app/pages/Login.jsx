@@ -4,6 +4,7 @@ import BasicTextInput  from '../../components/BasicTextInput';
 import BasicButton from "../../components/buttons/BasicButton";
 import { router } from "expo-router";
 import login from '../AuthContext';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -13,9 +14,9 @@ const Login = () => {
 
     const onSubmit = async () => {
         try {
-            await login(username, password);
+            const user = await login(username, password);
+            await AsyncStorage.setItem('firstName', user);
             setIsLoggedIn(true); 
-            
         }
         catch (error) {
             console.error('Error:', error);

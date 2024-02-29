@@ -13,6 +13,7 @@ const BasicTextInput = ({title, placeholder, value, setValue, secureTextEntry}) 
         placeholder={placeholder}
         onChangeText={setValue}
         secureTextEntry={secureTextEntry}
+        autoCapitalize="none"
       />
     </SafeAreaView>
     );

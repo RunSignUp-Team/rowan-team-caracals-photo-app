@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; 
+import React, { useState, useEffect } from 'react'; 
 //import Ionicons from '@expo/vector-icons/Ionicons';
 import { FontAwesome } from '@expo/vector-icons';
 import GalleryPageButton from "../../components/buttons/GalleryButton";
@@ -8,20 +8,33 @@ import { StatusBar } from 'expo-status-bar';
 import {Image, StyleSheet, Text, TouchableHighlight, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import SettingsButton from "../../components/buttons/SettingsButton";
 import SettingsModal from '../../components/modals/SettingsModal'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { COLORS } from "../../constants/Colors";
 import CameraPageButton from '../../components/buttons/CameraButton';
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
-
-
 const logoImage = require('../../assets/brand/logo-circle.png')
 const logoText = require('../../assets/brand/logo-text.png')
 
-
-
 const Homepage = () => {
     const [modalVisible, setModalVisible] = useState(false);
+    const [firstName, setFirstName] = useState('');
+
+    useEffect(() => {
+        const getFirstNameFromStorage = async () => {
+            try {
+                const storedFirstName = await AsyncStorage.getItem('firstName');
+                if (storedFirstName) {
+                    setFirstName(storedFirstName);
+                }
+            } catch (error) {
+                console.error('Could not retrieve first name from storage:', error);
+            }
+        };
+        getFirstNameFromStorage();
+    }, []);
+    
     return (
         <SafeAreaView style={styles.container}>
             
@@ -46,7 +59,7 @@ const Homepage = () => {
                 style={styles.textLogo}
                 source={logoText} />
 
-            <Text style={styles.welcomeText}>Welcome, Bruce!</Text>
+            <Text style={styles.welcomeText}>Welcome, {firstName}!</Text>
             <View style={styles.line} />
 
             <View style={styles.bottomLayer}>
@@ -121,7 +134,9 @@ const styles = StyleSheet.create({
     welcomeText: {
         alignItems: 'center',
         fontSize: 35,
-        top: -170
+        top: -170,
+        paddingTop: 10,
+        fontFamily: 'SF-Pro-Text-Light',
     },
     galleryButton: {
         position: 'absolute',
