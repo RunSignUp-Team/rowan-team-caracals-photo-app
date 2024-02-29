@@ -22,8 +22,10 @@ async function login(username, password) {
     if(responseText.error) {
       throw new Error(responseText.error.error_msg); 
     }
-    console.log('Request successful. JSON:');
-    console.log(responseText);
+    // console.log('Request successful. JSON:');
+    // console.log(responseText.user.user.first_name);
+
+    return responseText.user.user.first_name;
   } catch (error) {
    // console.error('Come on.', error);
     throw new Error('Login failed');

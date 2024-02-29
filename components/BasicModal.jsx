@@ -3,14 +3,14 @@ import { View, Modal, StyleSheet, TouchableOpacity, Text } from "react-native";
 import Ionicons from '@expo/vector-icons/Ionicons';
 
 
-// fix that later you doofus
+
 
 export default function BasicModal({ modalVisible, setModalVisible, message }) {
     return (
         <Modal
             transparent={true}
-            visible={modalVisible}>,
-            animationType = 'slide' 
+            visible={modalVisible}
+            animationType = 'slide'> 
             <View style={styles.overlay}>
                 <View style={styles.modalView}>
                     <TouchableOpacity style={styles.closeButton} onPress={() => setModalVisible(false)}>
