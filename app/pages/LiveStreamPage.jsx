@@ -12,7 +12,6 @@ const Login = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            
             <View style = {styles.home_button}>
                 <SmallBasicButton title={'Home'} fontFamily={'SF-Pro-Text-Bold'} onPress={goToHomePage}></SmallBasicButton>
             </View>

@@ -3,6 +3,8 @@ import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-nativ
 import {Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import MutableCamButton from '../../components/buttons/MutableCamButton'
+import BasicButton from '../../components/buttons/BasicButton'
+import { router } from 'expo-router';
 
 const CameraPage = () => {
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
@@ -10,6 +12,10 @@ const CameraPage = () => {
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const cameraRef = useRef(null);
+
+    const goToHomePage = () => {
+        router.navigate('pages/Homepage');
+      };
 
     useEffect(() => {
         (async () => {
@@ -73,6 +79,7 @@ const CameraPage = () => {
             <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
         }
         </View>
+        <BasicButton title={'Home'} fontFamily={'SF-Pro-Text-Bold'} onPress={goToHomePage}></BasicButton>
         </View>
     );
 }
