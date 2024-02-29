@@ -18,10 +18,15 @@ async function login(username, password) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     const responseText = await response.json();
+
+    if(responseText.error) {
+      throw new Error(responseText.error.error_msg); 
+    }
     console.log('Request successful. JSON:');
     console.log(responseText);
   } catch (error) {
-    console.error('Come on.', error);
+   // console.error('Come on.', error);
+    throw new Error('Login failed');
   }
 }
 

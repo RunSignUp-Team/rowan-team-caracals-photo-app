@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SafeAreaView, Text, StyleSheet } from 'react-native';
 import BasicTextInput  from '../../components/BasicTextInput';
 import BasicButton from "../../components/buttons/BasicButton";
@@ -8,20 +8,27 @@ import login from '../AuthContext';
 const Login = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [loginError, setLoginError] = useState('');
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
     const onSubmit = async () => {
         try {
             await login(username, password);
+            setIsLoggedIn(true); 
+            
         }
         catch (error) {
             console.error('Error:', error);
+            setLoginError("Incorrect Username or Password")
         }
-        router.navigate('pages/Homepage');
+       
     }
 
-    // const goToHomePage = () => {
-    //     router.navigate('pages/Homepage');
-    //   };
+    useEffect(() => {
+        if (isLoggedIn) {
+            router.navigate('pages/Homepage');
+        }
+    }, [isLoggedIn]); 
 
     return (
         <SafeAreaView style={styles.container}>
