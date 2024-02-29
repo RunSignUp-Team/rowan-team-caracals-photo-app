@@ -4,8 +4,8 @@ import { AntDesign } from '@expo/vector-icons';
 import { router } from "expo-router";
 
 const SendToCamera = () => (
-   // router.navigate('pages/Gallery')
-   console.log("Live Pressed")
+    router.navigate('pages/LiveStreamPage')
+   //console.log("Live Pressed")
 )
 
 const CameraPageButton = ({ size, color, style }) => (
