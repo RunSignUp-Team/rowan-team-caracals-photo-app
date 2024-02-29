@@ -6,11 +6,17 @@ import SettingsButton from "../../components/buttons/SettingsButton";
 import GalleryPageButton from "../../components/buttons/GalleryButton";
 import LiveStreamButton from "../../components/buttons/LiveStreamButton";
 import CameraPageButton from '../../components/buttons/CameraButton';
+import BasicTextInput  from '../../components/BasicTextInput';
+import SelectDropdown from "react-native-select-dropdown";
 import { COLORS } from "../../constants/Colors";
 import { router } from "expo-router";
 const goToHomePage = () => {
     router.navigate('pages/Homepage');
   };
+
+/*Some dummy information for now*/
+const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
+const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
 
 const Gallery = () => {
     return(
@@ -27,6 +33,24 @@ const Gallery = () => {
                 style={styles.statusButton} />
             <View style={styles.line} />
 
+        {/*Fill in with actual info later*/}
+        <View style = {styles.middleLayer}>
+            <BasicTextInput title = 'Race'/>
+            <SelectDropdown
+                defaultButtonText = 'Select a date'
+                data = {dates}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                }}
+            />
+            <SelectDropdown
+                defaultButtonText = 'Select an album'
+                data = {albums}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                }}
+            />
+        </View>
             
             <View style={styles.bottomLayer}>
 
@@ -82,6 +106,12 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 1.2,
         backgroundColor: 'black',
+    },
+    middleLayer: {
+        flex: 2,
+        position: 'relative',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     bottomLayer: {
         // flex: 1/8,
