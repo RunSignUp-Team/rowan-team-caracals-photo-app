@@ -11,7 +11,7 @@ export default function Layout() {
   const [loaded] = useFonts({
     'SF-Pro-Text-Bold': require('../assets/fonts/SF-Pro-Text-Bold.otf'),
     'SF-Pro-Text-Light': require('../assets/fonts/SF-Pro-Text-Light.otf'),
-    'SF-Pro-Display-Bold': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+    'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
   });
   if (!loaded) {
     return null;
