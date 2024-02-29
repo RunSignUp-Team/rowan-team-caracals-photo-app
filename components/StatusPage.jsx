@@ -4,9 +4,8 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import BasicOptionButton from "./BasicOptionButton";
 
 
-
-
-export default function StatusPage ({ modalVisible, setModalVisible, message }) {
+export default function StatusPage ({ modalVisible, setModalVisible, message }) {   
+    
     return (
         <Modal
             animationType="fade"

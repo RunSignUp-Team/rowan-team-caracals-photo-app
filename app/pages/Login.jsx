@@ -14,20 +14,21 @@ const Login = () => {
 
     const onSubmit = async () => {
         try {
-            const user = await login(username, password);
-            await AsyncStorage.setItem('firstName', user);
-            setIsLoggedIn(true); 
-        }
+            const userInfo = await login(username, password);
+            await AsyncStorage.setItem('firstName', userInfo.user.user.first_name);
+            await AsyncStorage.setItem('tmp_key', userInfo.tmp_key);
+            await AsyncStorage.setItem('tmp_secret', userInfo.tmp_secret);
+            await AsyncStorage.setItem('lastName', userInfo.user.user.last_name);
+            setIsLoggedIn(true); }
         catch (error) {
             console.error('Error:', error);
             setLoginError("Incorrect Username or Password")
         }
-       
     }
 
     useEffect(() => {
         if (isLoggedIn) {
-            router.navigate('pages/Homepage');
+            router.push('pages/Homepage');
         }
     }, [isLoggedIn]); 
 

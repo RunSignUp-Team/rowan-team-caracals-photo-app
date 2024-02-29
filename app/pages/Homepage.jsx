@@ -13,9 +13,6 @@ import StatusModal from '../../components/StatusPage'
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import SettingsModal from '../../components/modals/SettingsModal'
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
 import { COLORS } from "../../constants/Colors";
 import CameraPageButton from '../../components/buttons/CameraButton';
 //import Ionicons from '@expo/vector-icons/Ionicons';
