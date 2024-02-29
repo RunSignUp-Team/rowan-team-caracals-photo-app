@@ -59,7 +59,7 @@ const Homepage = () => {
                      style={styles.galleryButton} />
 
                 <CameraPageButton
-                    size={46}
+                    size={49}
                     color="black"
                     style = {styles.cameraButton} />
 
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
        // flex: 1/8,
         position: 'absolute',
         bottom: 0, 
-        height: '9%', 
+        height: '10%', 
         backgroundColor: COLORS.RSU_pink,
         width: '100%',
         alignItems: 'center',
@@ -126,18 +126,18 @@ const styles = StyleSheet.create({
     },
     galleryButton: {
         position: 'absolute',
-        bottom: 20,
-        left: 85,
+        bottom: 21,
+        left: 60,
     },
     cameraButton: {
         position: 'absolute', 
         bottom: 18,
-        left: 210,
+        alignContent: "center"
     },
     liveButton: {
         position: 'absolute',
         bottom: 18,
-        left: 300,
+        right: 60,
     },
     statusButton: {
         position: 'absolute',

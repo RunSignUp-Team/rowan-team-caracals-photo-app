@@ -3,6 +3,9 @@ import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-nativ
 import SmallBasicButton from "../../components/buttons/SmallBasicButton";
 import StatusButton from "../../components/buttons/StatusButton";
 import SettingsButton from "../../components/buttons/SettingsButton";
+import GalleryPageButton from "../../components/buttons/GalleryButton";
+import LiveStreamButton from "../../components/buttons/LiveStreamButton";
+import CameraPageButton from '../../components/buttons/CameraButton';
 import { COLORS } from "../../constants/Colors";
 import { router } from "expo-router";
 const goToHomePage = () => {
@@ -24,6 +27,26 @@ const Gallery = () => {
                 style={styles.statusButton} />
             <View style={styles.line} />
 
+            
+            <View style={styles.bottomLayer}>
+
+                <View style={styles.galleryButton} />
+                <GalleryPageButton
+                     size={42}
+                        color="black"
+                     style={styles.galleryButton} />
+
+                <CameraPageButton
+                    size={49}
+                    color="black"
+                    style = {styles.cameraButton} />
+
+                <LiveStreamButton
+                    size={46}
+                    color="black"
+                    style = {styles.liveButton} />
+            </View>
+
         </View>
     );
 }
@@ -32,6 +55,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: COLORS.off_white,
+        marginBottom: -34
     },
     home_button: {
         flex: 1,
@@ -58,6 +82,31 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 1.2,
         backgroundColor: 'black',
+    },
+    bottomLayer: {
+        // flex: 1/8,
+         position: 'absolute',
+         bottom: 0, 
+         height: '10%', 
+         backgroundColor: COLORS.RSU_pink,
+         width: '100%',
+         alignItems: 'center',
+         justifyContent: 'center',
+     },
+    galleryButton: {
+        position: 'absolute',
+        bottom: 20,
+        left: 60,
+    },
+    cameraButton: {
+        position: 'absolute', 
+        bottom: 18,
+        alignContent: 'center'
+    },
+    liveButton: {
+        position: 'absolute',
+        bottom: 18,
+        right: 60,
     },
 });
 export default Gallery
