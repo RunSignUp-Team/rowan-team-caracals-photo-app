@@ -4,6 +4,12 @@ import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-nativ
 import BasicButton from "../../components/buttons/BasicButton";
 import { COLORS } from "../../constants/Colors";
 import { useNavigation, router} from "expo-router";
+import BasicModal from "../../components/BasicModal";
+import BasicOptionButton from "../../components/BasicOptionButton";
+import LivestreamSettings from "./LivestreamSettings";
+import SettingsPage from "../../components/SettingsPage";
+import Login from "./Login";
+
 
  // TODO: Fix inconsistancy between iOS and Android BasicButton button location
 const logoImage = require('../../assets/brand/logo-circle.png')
@@ -13,6 +19,8 @@ const Starting = () => {
     };
     return (
         <View style={styles.container}>
+            {/* <BasicModal message={'This is a test'}></BasicModal> */}
+            {/* <BasicOptionButton title='basic'></BasicOptionButton> */}
             <Image
                 style={styles.logoMedium}
                 source={logoImage}/>

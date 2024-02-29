@@ -1,7 +1,6 @@
 import React, { useState } from 'react'; 
 //import Ionicons from '@expo/vector-icons/Ionicons';
 import { FontAwesome } from '@expo/vector-icons';
-import { router } from "expo-router";
 import GalleryPageButton from "../../components/buttons/GalleryButton";
 import LiveStreamButton from "../../components/buttons/LiveStreamButton";
 import StatusButton from "../../components/buttons/StatusButton";
