@@ -6,7 +6,7 @@ import BasicOptionButton from "./BasicOptionButton";
 
 
 
-export default function SettingsPage ({ modalVisible, setModalVisible, message }) {
+export default function StatusPage ({ modalVisible, setModalVisible, message }) {
     return (
         <Modal
             animationType="fade"
@@ -14,10 +14,11 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
             visible={modalVisible}>
             <View style={styles.overlay}>
                 <View style={styles.modalView}>
+                    
+                    <Text>Status: Online/Offline </Text>
+                    <Text> Upload Progress:</Text>
                     <BasicOptionButton title='Close' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
-                    <BasicOptionButton title='Option 1' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
-                    <BasicOptionButton title='Option 2' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
-                    <BasicOptionButton title='Option 3' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
+                 
                 </View>
             </View>
         </Modal>
