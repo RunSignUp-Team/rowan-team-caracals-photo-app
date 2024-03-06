@@ -1,9 +1,8 @@
 import React from "react";
 import { TextInput, Text, SafeAreaView, StyleSheet } from 'react-native'
-import { COLORS } from "../styles/colors";
+import { COLORS } from "../constants/Colors";
 
-const BasicTextInput = ({title}) => {
-    const [text, onChangeText] = React.useState();
+const BasicTextInput = ({title, placeholder, value, setValue, secureTextEntry}) => {
     return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
@@ -11,8 +10,10 @@ const BasicTextInput = ({title}) => {
       </Text>
       <TextInput
         style={styles.input}
-        onChangeText={onChangeText}
-        value={text}
+        placeholder={placeholder}
+        onChangeText={setValue}
+        secureTextEntry={secureTextEntry}
+        autoCapitalize="none"
       />
     </SafeAreaView>
     );

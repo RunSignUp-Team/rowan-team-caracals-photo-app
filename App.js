@@ -22,3 +22,4 @@ export default function App() {
      //<Starting></Starting> // Display the Starting page
   );
 }
+
