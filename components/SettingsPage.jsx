@@ -19,6 +19,7 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
     const logoImage = require('../assets/brand/logo-circle.png')
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
+    const [isActive, setIsActive] = useState(false);
 
     useEffect(() => {
         const getFirstandLastNameFromStorage = async () => {
@@ -54,6 +55,12 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
             console.log('Temporary keys not found');
         }
     };
+
+    const toggleIsActive = () => {
+        setIsActive(!isActive);
+    }
+        
+
     return (
         <Modal
             animationType="fade"
@@ -67,6 +74,7 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
                     <Text style={styles.names}>{firstName} {lastName}</Text>
                     <BasicOptionButton title='Close' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
                     <BasicOptionButton title='Log Out' onPress={handleLogout} style={styles.button}></BasicOptionButton>
+                    <BasicOptionButton title={isActive ? 'Fast Photo Enabled' : 'Fast Photo Disabled'} onPress={toggleIsActive} style={styles.button}></BasicOptionButton>
                 </View>
             </View>
         </Modal>
