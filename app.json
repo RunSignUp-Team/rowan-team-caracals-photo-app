@@ -18,8 +18,8 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-      "NSCameraUsageDescription": "Caracal App needs access to your Camera.",
-      "NSMicrophoneUsageDescription": "Caracal App needs access to your Microphone."
+      "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
+      "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
       }
     },
     "android": {
@@ -43,7 +43,7 @@
     
       "expo-camera":
       {
-         "cameraPermission": "Allow Caracal App to access your Camera."
+         "cameraPermission": "Allow $(PRODUCT_NAME) to access your Camera."
        }
     
   }

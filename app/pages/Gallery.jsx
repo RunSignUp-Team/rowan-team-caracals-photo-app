@@ -131,14 +131,18 @@ const styles = StyleSheet.create({
         marginTop: 100
     },
     bottomLayer: {
-        // flex: 1/8,
+        flex: 1,
          position: 'absolute',
-         bottom: 0, 
-         height: '10%', 
+        height: 80, 
          backgroundColor: COLORS.RSU_pink,
+        borderColor: COLORS.black,
+        borderStyle: 'solid',
+        borderTopWidth: 1,
          width: '100%',
          alignItems: 'center',
          justifyContent: 'center',
+        flexDirection: 'row',
+        bottom: -1,
      },
     galleryButton: {
         position: 'absolute',

@@ -26,8 +26,8 @@ async function logout(tmp_key, tmp_secret) {
             throw new Error(responseText.error.error_msg);
         }
 
-        console.log('Request successful. JSON:');
-        console.log(responseText);
+        // console.log('Request successful. JSON:');
+        // console.log(responseText);
 
         return responseText;
     } catch (error) {

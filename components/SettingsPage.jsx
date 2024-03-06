@@ -5,8 +5,17 @@ import BasicOptionButton from "./BasicOptionButton";
 import logout from "../app/UnauthContext";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
+import { useFonts } from "expo-font";
 
 export default function SettingsPage ({ modalVisible, setModalVisible, message }) {
+    const [loaded] = useFonts({
+        'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
+      });
+    
+      if (!loaded) {
+        return null;
+      }
+    
     const logoImage = require('../assets/brand/logo-circle.png')
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

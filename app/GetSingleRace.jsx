@@ -1,8 +1,9 @@
-async function getRaces(tmp_key, tmp_secret) {
-    const url = 'https://test3.runsignup.com/rest/races';
+async function getSingleRace(tmp_key, tmp_secret, race_id) {
+    const url = 'https://test3.runsignup.com/rest/race/:race_id';
     const params = new URLSearchParams({
         tmp_key: tmp_key,
         tmp_secret: tmp_secret,
+        race_id: race_id,
         format: 'json'
     });
     
@@ -16,11 +17,10 @@ async function getRaces(tmp_key, tmp_secret) {
         }
 
         const responseData = await response.json();
-        return responseData.races;
+        return responseData;
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-export default getRaces;
-
+export default getSingleRace;

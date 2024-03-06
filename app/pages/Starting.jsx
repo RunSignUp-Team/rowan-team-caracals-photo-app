@@ -9,6 +9,11 @@ import BasicOptionButton from "../../components/BasicOptionButton";
 import LivestreamSettings from "./LivestreamSettings";
 import SettingsPage from "../../components/SettingsPage";
 import Login from "./Login";
+import SelectDropdown from "react-native-select-dropdown";
+import BasicDropdown from "../../components/BasicDropdown";
+import TextCard from "../../components/TextCard";
+import getRegRaces from "../GetRegRaces";
+import getSingleRace from "../GetSingleRace";
 
 
  // TODO: Fix inconsistancy between iOS and Android BasicButton button location
@@ -26,6 +31,7 @@ const Starting = () => {
                 source={logoImage}/>
             <BasicButton title={'Log-in'} fontFamily={'SF-Pro-Text-Bold'}
                         onPress={goToLoginPage}></BasicButton>
+            {/* <BasicDropdown title='Select a date'></BasicDropdown> */}
         </View>
     );}
 
