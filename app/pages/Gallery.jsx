@@ -20,6 +20,7 @@ const goToHomePage = () => {
 /*Some dummy information for now*/
 const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
 const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
+const races = ["Race 1", "Race 2", "Race 3"]
 
 const Gallery = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
@@ -51,7 +52,13 @@ const Gallery = () => {
 
         {/*Fill in with actual info later */}
         <View style = {styles.middleLayer}>
-            <BasicTextInput title = 'Race'/>
+        <SelectDropdown
+                defaultButtonText = 'Race'
+                data = {races}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                }}
+            />
             <SelectDropdown
                 defaultButtonText = 'Select a date'
                 data = {dates}
