@@ -3,25 +3,36 @@ import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-nativ
 import {Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import MutableCamButton from '../../components/buttons/MutableCamButton'
-import BasicButton from '../../components/buttons/BasicButton'
 import { router } from 'expo-router';
+import {Video} from 'expo-av';
 
 const CameraPage = () => {
+    const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
+    const [hasAudioPermission, setHasAudioPermission] = useState(null);
     const [image, setImage] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+    const [isRecording, setIsRecording] = useState(false);
+    const [video, setVideo] = useState(undefined);
     const cameraRef = useRef(null);
 
     const goToHomePage = () => {
         router.navigate('pages/Homepage');
       };
+    
+    const goToVideoPage = () => {
+        router.navigate('pages/VideoPage');
+    };
 
     useEffect(() => {
         (async () => {
-          MediaLibrary.requestPermissionsAsync();
+          const mediaLibraryStatus= await MediaLibrary.requestPermissionsAsync();
           const cameraStatus = await Camera.requestCameraPermissionsAsync();
+          const audioStatus = await Camera.requestMicrophonePermissionsAsync();
+          setHasMediaLibraryPermission(mediaLibraryStatus.status === 'granted');
           setHasCameraPermission(cameraStatus.status === 'granted');
+          setHasAudioPermission(audioStatus.status === 'granted');
         })();
       }, [])
 
@@ -49,8 +60,8 @@ const CameraPage = () => {
         }
     }
 
-    if(hasCameraPermission === false) {
-        return <Text>No access to camera</Text>
+    if(!hasCameraPermission) {
+        return <Text>This feature needs permission to your camera to function. Please enable it in your phone's settings.</Text>
     }
 
     return(
@@ -67,19 +78,19 @@ const CameraPage = () => {
         }
         <View>
             {image ? 
-            <View style= {{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                paddingHorizontal: 50,
-            }}>
-                <MutableCamButton title={"Re-take"} icon="retweet" onPress={() => setImage(null)}/>
-                <MutableCamButton title={"Save"} icon="check" onPress={saveImage}/>
+            <View style={styles.sideButtons}>
+                <MutableCamButton title={"Re-take"} icon="arrow-redo" onPress={() => setImage(null)}/>
+                <MutableCamButton title={"Save"} icon="checkmark" onPress={saveImage}/>
             </View>
             :
-            <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
-        }
+                <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
+                /* <MutableCamButton title={isRecording ? 'Stop recording' : 'Take a video'} icon="videocam" onPress={isRecording ? stopRecording : takeVideo}/> */
+            }
         </View>
-        <BasicButton title={'Home'} fontFamily={'SF-Pro-Text-Bold'} onPress={goToHomePage}></BasicButton>
+            <View style={styles.sideButtons}>
+                <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
+                <MutableCamButton title={'Video'} icon="videocam" onPress={goToVideoPage}/>
+            </View>
         </View>
     );
 }
@@ -94,6 +105,10 @@ const styles = StyleSheet.create({
     camera: {
       flex: 1,
       borderRadius: 20,
-    }
-  });
-  export default CameraPage
+    },
+    sideButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 50,
+    },
+  }); export default CameraPage
