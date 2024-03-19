@@ -14,6 +14,11 @@ import BasicDropdown from "../../components/BasicDropdown";
 import TextCard from "../../components/TextCard";
 import getRegRaces from "../GetRegRaces";
 import getSingleRace from "../GetSingleRace";
+import BasicSwitch from "../../components/BasicSwitch";
+import BasicTextInput from "../../components/BasicTextInput";
+import * as Linking from 'expo-linking';
+import * as AuthSession from 'expo-auth-session';
+
 
 
  // TODO: Fix inconsistancy between iOS and Android BasicButton button location
@@ -22,16 +27,26 @@ const Starting = () => {
     const goToLoginPage = () => {
       router.navigate('pages/Login');
     };
+
+const url = AuthSession.makeRedirectUri({
+    scheme: 'run-media-up',
+    path: 'pages/Homepage'
+});
+
     return (
         <View style={styles.container}>
             {/* <BasicModal message={'This is a test'}></BasicModal> */}
             {/* <BasicOptionButton title='basic'></BasicOptionButton> */}
+{/* Normal login */}
             <Image
                 style={styles.logoMedium}
                 source={logoImage}/>
             <BasicButton title={'Log-in'} fontFamily={'SF-Pro-Text-Bold'}
                         onPress={goToLoginPage}></BasicButton>
-            {/* <BasicDropdown title='Select a date'></BasicDropdown> */}
+{/* Test of Linking if anyone is interested. */}
+            {/* <Text style={styles.testText}>URL: {url}</Text>
+            <Button title='yeah' onPress={() => Linking.openURL(url)}>Open URL</Button> */}
+            {/* <BasicDropdown title='Select a race'></BasicDropdown> */}
         </View>
     );}
 

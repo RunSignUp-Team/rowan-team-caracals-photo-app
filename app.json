@@ -2,7 +2,7 @@
   "expo": {
     "name": "media-app",
     "slug": "media-app",
-    "scheme": "media-app",
+    "scheme": "run-media-up",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/logo-text.png",
