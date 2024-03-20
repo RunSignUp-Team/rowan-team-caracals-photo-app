@@ -46,24 +46,24 @@ const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
 
 
 
-const fetchRaceIDs = async () => {
-        try {
-            // Fetch the temporary keys from storage
-            const tmpKey = await AsyncStorage.getItem('tmp_key');
-            const tmpSecret = await AsyncStorage.getItem('tmp_secret');
-            // Fetch races using the temporary keys
-            const races = await getRegRaces(tmpKey, tmpSecret);
-            const registeredRaces = races.user_registered_races;
+// const fetchRaceIDs = async () => {
+//         try {
+//             // Fetch the temporary keys from storage
+//             const tmpKey = await AsyncStorage.getItem('tmp_key');
+//             const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+//             // Fetch races using the temporary keys
+//             const races = await getRegRaces(tmpKey, tmpSecret);
+//             const registeredRaces = races.user_registered_races;
     
-            const raceIDs = registeredRaces.map(race => race.race_id);
+//             const raceIDs = registeredRaces.map(race => race.race_id);
     
-            return raceIDs;
-        } catch (error) {
-            console.error("Error fetching race IDs:", error);
-            throw error; // Rethrow the error for handling at the higher level
-        }
-    }
-    fetchRaceIDs();
+//             return raceIDs;
+//         } catch (error) {
+//             console.error("Error fetching race IDs:", error);
+//             throw error; // Rethrow the error for handling at the higher level
+//         }
+//     }
+//     fetchRaceIDs();
 
 const fetchRaceInfo = async () => {
          try {
@@ -89,7 +89,7 @@ const Gallery = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
     const [statusModalVisible, setStatusModalVisible] = useState(false)
 
-//    const[RaceDateList, setRaceDateList] = useState([{'name':'','id':''}])
+    const[raceDateList, setRaceDateList] = useState([])
 
 //    useEffect(() => {
 //        const fetchRaceData = async () => {
@@ -100,7 +100,18 @@ const Gallery = () => {
 //        fetchRaceData();
 //    })
 
+useEffect(() => {
+    const fetchRaceDateList = async () => {
+        try {
+            const raceDateList = await fetchRaceInfo();
+            setRaceDateList(raceDateList);
+        } catch (error) {
+            console.error('Error fetching race next dates:', error);
+        }
+    };
 
+    fetchRaceDateList();
+}, []);
 
     return(
         <View style = {styles.container}>
@@ -132,7 +143,7 @@ const Gallery = () => {
             <BasicTextInput title = 'Race'/>
             <SelectDropdown
                 defaultButtonText = 'Select a date'
-                data = {info}
+                data = {raceDateList}
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index)
                 }}
