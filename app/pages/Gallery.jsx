@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
 import SmallBasicButton from "../../components/buttons/SmallBasicButton";
 import StatusButton from "../../components/buttons/StatusButton";
@@ -10,20 +10,98 @@ import SettingsModal from '../../components/SettingsPage'
 import StatusModal from '../../components/StatusPage'
 import BasicTextInput  from '../../components/BasicTextInput';
 import SelectDropdown from "react-native-select-dropdown";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLORS } from "../../constants/Colors";
 import { router } from "expo-router";
+import getRaceDates from "../GetRaceDates";
+import getRaces from '../GetRaces';
+import getRegRaces from '../GetRegRaces';
+import getSingleRace from '../GetSingleRace';
 const goToHomePage = () => {
     router.navigate('pages/Homepage');
     
   };
 
 /*Some dummy information for now*/
-const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
+const info = ["8/13/1942", "5/7/1996", "8/24/2003"]
 const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
+
+
+
+
+// const fetchRaces = async () => {
+//     try {
+//         const tmpKey = await AsyncStorage.getItem('tmp_key');
+//         const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+//         const races = await getRaces(tmpKey, tmpSecret);
+//         console.log(races);
+//         races.AsyncStorage.getRaceDates
+//     }
+//     catch (error) {
+//         console.error('Error:', error);
+//     }
+// }
+
+// fetchRaces();
+
+
+
+const fetchRaceIDs = async () => {
+        try {
+            // Fetch the temporary keys from storage
+            const tmpKey = await AsyncStorage.getItem('tmp_key');
+            const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+            // Fetch races using the temporary keys
+            const races = await getRegRaces(tmpKey, tmpSecret);
+            const registeredRaces = races.user_registered_races;
+    
+            const raceIDs = registeredRaces.map(race => race.race_id);
+    
+            return raceIDs;
+        } catch (error) {
+            console.error("Error fetching race IDs:", error);
+            throw error; // Rethrow the error for handling at the higher level
+        }
+    }
+    fetchRaceIDs();
+
+const fetchRaceInfo = async () => {
+         try {
+             const raceIDs = await fetchRaceIDs(); // Get race IDs
+             const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
+             const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
+    
+             // Fetch race info for all race IDs concurrently
+             const raceInfoPromises = raceIDs.map(async race_id => {
+                 info = await getSingleRace(tmpKey, tmpSecret, race_id);
+                 console.log(info.race.name, 'info');
+                 return [info.race.name];
+             });
+         } catch (error) {
+             console.error('Error:', error);
+             throw error;
+         }
+     }
+
+     fetchRaceInfo();
 
 const Gallery = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
     const [statusModalVisible, setStatusModalVisible] = useState(false)
+
+//    const[RaceDateList, setRaceDateList] = useState([{'name':'','id':''}])
+
+//    useEffect(() => {
+//        const fetchRaceData = async () => {
+//            const response = await fetch('https://test3.runsignup.com/rest/races?');
+//            const newData = await response.json();
+//            setRaceDateList(newData);
+//        };
+//        fetchRaceData();
+//    })
+
+
+
     return(
         <View style = {styles.container}>
             <View style = {styles.home_button}>
@@ -54,7 +132,7 @@ const Gallery = () => {
             <BasicTextInput title = 'Race'/>
             <SelectDropdown
                 defaultButtonText = 'Select a date'
-                data = {dates}
+                data = {info}
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index)
                 }}
