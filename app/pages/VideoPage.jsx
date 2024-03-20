@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { View, Text, SafeAreaView, StyleSheet, Image, Button } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import MutableCamButton from '../../components/buttons/MutableCamButton'
@@ -90,6 +90,12 @@ return(
     />
     }
     <View>
+    <TouchableOpacity>
+                    <View style={styles.sideButtons}>
+                        <Text style={styles.otherPage} onPress={goToCameraPage}>PHOTO</Text>
+                        <Text style={styles.currentPage}>VIDEO</Text>
+                    </View>
+                </TouchableOpacity>
         {video ? 
         <View style={styles.sideButtons}>
             <MutableCamButton title={"Discard"} icon="close" onPress={discardVideo}/>
@@ -101,10 +107,7 @@ return(
         </View>
         }
     </View>
-        <View style={styles.sideButtons}>
-            <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
-            <MutableCamButton title={'Camera'} icon="camera" onPress={goToCameraPage}/>
-        </View>
+        <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
     </View>
 );
 }
@@ -128,5 +131,14 @@ return(
         video: {
             flex: 1,
             alignSelf: 'stretch',
-        }
+        },
+        currentPage: {
+            fontWeight: 'bold',
+            fontSize: 16,
+            color: '#ff0000',
+        },
+        otherPage: {
+            fontWeight: 'bold',
+            fontSize: 16,
+        },
       }); export default VideoPage
