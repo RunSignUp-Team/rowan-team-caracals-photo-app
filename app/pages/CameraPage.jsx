@@ -12,8 +12,6 @@ const CameraPage = () => {
     const [image, setImage] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
-    const [isRecording, setIsRecording] = useState(false);
-    const [video, setVideo] = useState(undefined);
     const cameraRef = useRef(null);
 
     const goToHomePage = () => {
