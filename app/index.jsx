@@ -19,9 +19,9 @@ export default function Layout() {
   
   return (
     //  <Login></Login> // Display the login page
-      <Homepage></Homepage> // Display the Home page
+    //  <Homepage></Homepage> // Display the Home page
     // <Gallery></Gallery> // Display the Gallery page
-    // <Starting></Starting> // Display the Starting page
+     <Starting></Starting> // Display the Starting page
     //<Starting></Starting>
   );
 }

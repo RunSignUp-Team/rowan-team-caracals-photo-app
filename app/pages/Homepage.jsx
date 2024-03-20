@@ -79,7 +79,7 @@ useEffect(() => {
 //     }
 // };
 
-// fetchRaceInfo();
+//fetchRaceInfo();
 
 const fetchRaces = async () => {
     try {

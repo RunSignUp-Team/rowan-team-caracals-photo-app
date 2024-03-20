@@ -46,50 +46,56 @@ const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
 
 
 
-// const fetchRaceIDs = async () => {
-//         try {
-//             // Fetch the temporary keys from storage
-//             const tmpKey = await AsyncStorage.getItem('tmp_key');
-//             const tmpSecret = await AsyncStorage.getItem('tmp_secret');
-//             // Fetch races using the temporary keys
-//             const races = await getRegRaces(tmpKey, tmpSecret);
-//             const registeredRaces = races.user_registered_races;
+const fetchRaceIDs = async () => {
+        try {
+            // Fetch the temporary keys from storage
+            const tmpKey = await AsyncStorage.getItem('tmp_key');
+            const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+            // Fetch races using the temporary keys
+            const races = await getRegRaces(tmpKey, tmpSecret);
+            const registeredRaces = races.user_registered_races;
     
-//             const raceIDs = registeredRaces.map(race => race.race_id);
-    
-//             return raceIDs;
-//         } catch (error) {
-//             console.error("Error fetching race IDs:", error);
-//             throw error; // Rethrow the error for handling at the higher level
-//         }
-//     }
-//     fetchRaceIDs();
+            const raceIDs = registeredRaces.map(race => race.race_id);
+            console.log("\n\nFirst", races);
+            console.log("\n\nSecond", registeredRaces);
+            console.log("\n\nThird", raceIDs);
+            return raceIDs;
+        } catch (error) {
+            console.error("Error fetching race IDs:", error);
+            throw error; // Rethrow the error for handling at the higher level
+        }
+    }
+    fetchRaceIDs();
 
 const fetchRaceInfo = async () => {
          try {
              const raceIDs = await fetchRaceIDs(); // Get race IDs
              const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
              const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
-    
+             console.log("\n\nFourth", raceIDs);
              // Fetch race info for all race IDs concurrently
              const raceInfoPromises = raceIDs.map(async race_id => {
                  info = await getSingleRace(tmpKey, tmpSecret, race_id);
-                 console.log(info.race.name, 'info');
-                 return [info.race.name];
+                 console.log(info.race.race_id, 'info\n\n');
+                 
+                 return [info.user_registered_races.race_id];
              });
+             console.log("HELLOOOOOOOOOO", raceInfoPromises);
+             return raceInfoPromises;
          } catch (error) {
              console.error('Error:', error);
              throw error;
          }
+         
      }
 
      fetchRaceInfo();
 
 const Gallery = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
-    const [statusModalVisible, setStatusModalVisible] = useState(false)
+    const [statusModalVisible, setStatusModalVisible] = useState(false);
 
-    const[raceDateList, setRaceDateList] = useState([])
+    const[raceDateList, setRaceDateList] = useState([]);
 
 //    useEffect(() => {
 //        const fetchRaceData = async () => {
@@ -105,6 +111,7 @@ useEffect(() => {
         try {
             const raceDateList = await fetchRaceInfo();
             setRaceDateList(raceDateList);
+            console.log('\n\nThis is the information you WANT:', raceDateList, '\n\n');
         } catch (error) {
             console.error('Error fetching race next dates:', error);
         }
