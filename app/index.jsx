@@ -1,5 +1,5 @@
 import React from 'react';
-import { Starting, Login, Gallery, Homepage } from './pages/index'
+import { Album, Starting, Login, Gallery, Homepage } from './pages/index'
 import { createRouter, StackNavigation } from 'expo-router';
 import { useFonts } from 'expo-font';
 import { View, Text, StyleSheet } from 'react-native';
@@ -22,6 +22,7 @@ export default function Layout() {
     //  <Homepage></Homepage> // Display the Home page
     // <Gallery></Gallery> // Display the Gallery page
     // <Starting></Starting> // Display the Starting page
-    <Starting></Starting>
+    //<Starting></Starting>
+    <Album></Album>
   );
 }
