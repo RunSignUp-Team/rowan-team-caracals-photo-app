@@ -12,6 +12,7 @@ const CameraPage = () => {
     const [image, setImage] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
     const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
+    const [quickCam, setQuickCam] = useState(false);
     const cameraRef = useRef(null);
 
     const goToHomePage = () => {
@@ -38,7 +39,11 @@ const CameraPage = () => {
             try{
                 const data = await cameraRef.current.takePictureAsync();
                 console.log(data);
-                setImage(data.uri);
+                if(quickCam) {
+                    await MediaLibrary.createAssetAsync(data.uri);
+                } else {
+                    setImage(data.uri);
+                }
             } catch(e) {
                 console.log(e);
             }
@@ -54,6 +59,14 @@ const CameraPage = () => {
             } catch(e) {
                 console.log(e)
             }
+        }
+    }
+
+    const quickCamSettings = () => {
+        if(quickCam) {
+            setQuickCam(false);
+        } else {
+            setQuickCam(true);
         }
     }
 
@@ -81,14 +94,15 @@ const CameraPage = () => {
                     </View>
                 </TouchableOpacity>
             {image ? 
-            <View style={styles.sideButtons}>
-                <MutableCamButton title={"Re-take"} icon="arrow-redo" onPress={() => setImage(null)}/>
-                <MutableCamButton title={"Save"} icon="checkmark" onPress={saveImage}/>
-            </View>
+                <View style={styles.sideButtons}>
+                    <MutableCamButton title={"Re-take"} icon="arrow-redo" onPress={() => setImage(null)}/>
+                    <MutableCamButton title={"Save"} icon="checkmark" onPress={saveImage}/>
+                </View>
             :
-            <View>
-                <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
-            </View>
+                <View style={styles.sideButtons}>
+                    <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
+                    <MutableCamButton title={'Quick Camera'} icon={quickCam ? "flash" : "flash-outline"} onPress={quickCamSettings}/>
+                </View>
             }
             <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
         </View>
