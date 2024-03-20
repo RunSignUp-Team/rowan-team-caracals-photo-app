@@ -1,26 +1,27 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native'
 import {Camera, CameraType} from 'expo-camera';
 import * as MediaLibrary from 'expo-media-library';
 import MutableCamButton from '../../components/buttons/MutableCamButton'
 import { router } from 'expo-router';
-import {Video} from 'expo-av';
 
-const VideoPage = () => {
+const CameraPage = () => {
     const [hasMediaLibraryPermission, setHasMediaLibraryPermission] = useState(null);
     const [hasCameraPermission, setHasCameraPermission] = useState(null);
     const [hasAudioPermission, setHasAudioPermission] = useState(null);
+    const [image, setImage] = useState(null);
     const [type, setType] = useState(Camera.Constants.Type.back);
+    const [flash, setFlash] = useState(Camera.Constants.FlashMode.off);
     const [isRecording, setIsRecording] = useState(false);
     const [video, setVideo] = useState(undefined);
-    const cameraRef = useRef();
+    const cameraRef = useRef(null);
 
     const goToHomePage = () => {
         router.navigate('pages/Homepage');
       };
-
-    const goToCameraPage = () => {
-        router.navigate('pages/CameraPage');
+    
+    const goToVideoPage = () => {
+        router.navigate('pages/VideoPage');
     };
 
     useEffect(() => {
@@ -34,37 +35,27 @@ const VideoPage = () => {
         })();
       }, [])
 
-    const recordVideo = async () => {
-        setIsRecording(true);
-        const options = {
-            quality: "1080p",
-            maxDuration: 30,
-            mute: false
-        };
-        cameraRef.current.recordAsync(options).then((recordedVideo) => {
-            setVideo(recordedVideo);
-            setIsRecording(false);
-        });
-        console.log(data.uri);
+    const takePicture = async () => {
+        if(cameraRef) {
+            try{
+                const data = await cameraRef.current.takePictureAsync();
+                console.log(data);
+                setImage(data.uri);
+            } catch(e) {
+                console.log(e);
+            }
+        }
     }
 
-    const stopRecording = async () => {
-        setIsRecording(false);
-        cameraRef.current.stopRecording();
-    }
-
-    const discardVideo = async () => {
-        setVideo(undefined);
-        setIsRecording(false);
-    }
-    
-    const saveVideo = async () => {
-        try{
-            await MediaLibrary.saveToLibraryAsync(video.uri);
-            alert('Video saved!')
-            setVideo(undefined);
-        } catch(e) {
-            console.log(e)
+    const saveImage = async () => {
+        if(image) {
+            try{
+                await MediaLibrary.createAssetAsync(image);
+                alert('Picture saved!')
+                setImage(null);
+            } catch(e) {
+                console.log(e)
+            }
         }
     }
 
@@ -72,73 +63,64 @@ const VideoPage = () => {
         return <Text>This feature needs permission to your camera to function. Please enable it in your phone's settings.</Text>
     }
 
-return(
-    <View style = {styles.container}>
-    {!video ?
-        <Camera
-            style={styles.camera}
-            type={type}
-            ref={cameraRef}>
-        </Camera>
-    :
-    <Video
-        style={styles.video}
-        source={{uri: video.uri}}
-        useNativeControls
-        resizeMode='contain'
-        isLooping
-    />
-    }
-    <View>
-    <TouchableOpacity>
+    return(
+        <View style = {styles.container}>
+        {!image ?
+            <Camera
+                style={styles.camera}
+                type={type}
+                flashMode={flash}
+                ref={cameraRef}>
+            </Camera>
+        :
+        <Image source={{uri: image}} style={styles.camera}/>
+        }
+        <View>
+                <TouchableOpacity>
                     <View style={styles.sideButtons}>
-                        <Text style={styles.otherPage} onPress={goToCameraPage}>PHOTO</Text>
-                        <Text style={styles.currentPage}>VIDEO</Text>
+                        <Text style={styles.currentPage}>PHOTO</Text>
+                        <Text style={styles.otherPage} onPress={goToVideoPage}>VIDEO</Text>
                     </View>
                 </TouchableOpacity>
-        {video ? 
-        <View style={styles.sideButtons}>
-            <MutableCamButton title={"Discard"} icon="close" onPress={discardVideo}/>
-            <MutableCamButton title={"Save"} icon="checkmark" onPress={saveVideo}/>
+            {image ? 
+            <View style={styles.sideButtons}>
+                <MutableCamButton title={"Re-take"} icon="arrow-redo" onPress={() => setImage(null)}/>
+                <MutableCamButton title={"Save"} icon="checkmark" onPress={saveImage}/>
+            </View>
+            :
+            <View>
+                <MutableCamButton title={'Take a picture'} icon="camera" onPress={takePicture}/>
+            </View>
+            }
+            <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
         </View>
-        :
-        <View>
-            <MutableCamButton title={isRecording ? 'Stop recording' : 'Start recording'} icon="videocam" onPress={isRecording ? stopRecording : recordVideo}/>
         </View>
-        }
-    </View>
-        <MutableCamButton title={'Home'} icon="home" onPress={goToHomePage}/>
-    </View>
-);
+    );
 }
 
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          backgroundColor: '#fff',
-          justifyContent: 'center',
-          paddingBottom: 20,
-        },
-        camera: {
-          flex: 1,
-          borderRadius: 20,
-        },
-        sideButtons: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            paddingHorizontal: 50,
-        },
-        video: {
-            flex: 1,
-            alignSelf: 'stretch',
-        },
-        currentPage: {
-            fontWeight: 'bold',
-            fontSize: 16,
-            color: '#ff0000',
-        },
-        otherPage: {
-            fontWeight: 'bold',
-            fontSize: 16,
-        },
-      }); export default VideoPage
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: '#fff',
+      justifyContent: 'center',
+      paddingBottom: 20,
+    },
+    camera: {
+      flex: 1,
+      borderRadius: 20,
+    },
+    sideButtons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 50,
+    },
+    currentPage: {
+        fontWeight: 'bold',
+        fontSize: 16,
+        color: '#ff0000',
+    },
+    otherPage: {
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+  }); export default CameraPage
