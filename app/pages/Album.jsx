@@ -121,13 +121,11 @@ const Album = () => {
 
         {/*Written by Ahmed*/}
 
-        <ScrollView>
-        <View style = {styles.photos}>
-            <PhotoButton
+        <ScrollView style={styles.scrollView}>
+            <PhotoButton style = {styles.photos}
                 defaultButtonText = 'Photo (photo id)'
                 photo={TestPhoto}
             />
-            </View>
         </ScrollView>
         {/*<FlatList>
             numColumns={1}
@@ -211,14 +209,11 @@ const styles = StyleSheet.create({
         backgroundColor: 'black',
     },
     photos: {
-        flex:1,
         position: 'relative',
         alignItems: 'center',
         justifyContent: 'center',
-        marginTop: 100,
-        width: 200,
-        height: 200,
-        marginBottom: -40
+        width: 50,
+        height: 50,
     },
     bottomLayer: {
         flex: 1,
@@ -248,6 +243,15 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 18,
         right: 60,
+    },
+    scrollView: {
+        position: 'relative',
+        marginVertical: 80,
+        borderWidth: 1, 
+        borderColor: COLORS.black,
+        bottom: 0,
+        width: '100%',
+
     },
 });
 export default Album
