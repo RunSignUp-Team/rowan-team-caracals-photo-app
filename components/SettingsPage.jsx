@@ -74,7 +74,7 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
                     <Text style={styles.names}>{firstName} {lastName}</Text>
                     <BasicOptionButton title='Close' onPress={() => setModalVisible(false)} style={styles.button}></BasicOptionButton>
                     <BasicOptionButton title='Log Out' onPress={handleLogout} style={styles.button}></BasicOptionButton>
-                    <BasicOptionButton title={isActive ? 'Fast Photo Enabled' : 'Fast Photo Disabled'} onPress={toggleIsActive} style={styles.button}></BasicOptionButton>
+                    {/* <BasicOptionButton title={isActive ? 'Fast Photo Enabled' : 'Fast Photo Disabled'} onPress={toggleIsActive} style={styles.button}></BasicOptionButton> */}
                 </View>
             </View>
         </Modal>

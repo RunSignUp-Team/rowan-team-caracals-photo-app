@@ -17,8 +17,8 @@ async function getRegRaces(tmp_key, tmp_secret) {
 
         const responseData = await response.json();
 
-        console.log('Request successful. JSON for Races Registered:');
-        console.log(responseData);
+        // console.log('Request successful. JSON for Races Registered:');
+        // console.log(responseData);
 
         return responseData; // Return the response data
     } catch (error) {

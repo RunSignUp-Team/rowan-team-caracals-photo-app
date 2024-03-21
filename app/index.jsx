@@ -22,7 +22,7 @@ export default function Layout() {
     //  <Homepage></Homepage> // Display the Home page
     // <Gallery></Gallery> // Display the Gallery page
     // <Starting></Starting> // Display the Starting page
-    //<Starting></Starting>
-    <Album></Album>
+    <Starting></Starting>
+    // <Album></Album>
   );
 }

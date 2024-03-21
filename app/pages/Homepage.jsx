@@ -12,21 +12,30 @@ import StatusModal from '../../components/StatusPage'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { COLORS } from "../../constants/Colors";
 import CameraPageButton from '../../components/buttons/CameraButton';
+import { useFonts } from 'expo-font';
+import BasicDropdown from '../../components/BasicDropdown';
 import BasicTextInput from '../../components/BasicTextInput';
 import getRegRaces from '../GetRegRaces';
 import getSingleRace from '../GetSingleRace';
 import getRaces from '../GetRaces';
+import TextCard from '../../components/TextCard';
+import { useNavigation, router } from 'expo-router';
+import * as Linking from 'expo-linking';
 
 //import Ionicons from '@expo/vector-icons/Ionicons';
-
 const logoImage = require('../../assets/brand/logo-circle.png')
 const logoText = require('../../assets/brand/logo-text.png')
 
 const Homepage = () => {
-
+    const [loaded] = useFonts({
+        'SF-Pro-Text-Light': require('../../assets/fonts/SF-Pro-Text-Light.otf'),
+      });
+      if (!loaded) {
+        return null;
+      }
+    
 const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 const [statusModalVisible, setStatusModalVisible] = useState(false);
-
 const [firstName, setFirstName] = useState('');
 
 useEffect(() => {
@@ -43,50 +52,78 @@ useEffect(() => {
     getFirstNameFromStorage();
 }, []);
 
-// const fetchRaceIDs = async () => {
-//     try {
-//         // Fetch the temporary keys from storage
-//         const tmpKey = await AsyncStorage.getItem('tmp_key');
-//         const tmpSecret = await AsyncStorage.getItem('tmp_secret');
-//         // Fetch races using the temporary keys
-//         const races = await getRegRaces(tmpKey, tmpSecret);
-//         const registeredRaces = races.user_registered_races;
+const [raceNames, setRaceNames] = useState([]);
 
-//         const raceIDs = registeredRaces.map(race => race.race_id);
+    useEffect(() => {
+        const fetchRaceNames = async () => {
+            try {
+                const raceNames = await fetchRaceInfo();
+                // Test Info
+                raceNames.push('Test Race Name');
+                raceNames.push('Another Test Race');
+                raceNames.push('Sloth Race');
+                raceNames.push('The Professor Myers Race');
+                raceNames.push('The Fun Group Run');
+                raceNames.push('The 5k');
+                raceNames.push('The 10k');
+                setRaceNames(raceNames);
+            } catch (error) {
+                console.error('Error fetching race names:', error);
+            }
+        };
 
-//         return raceIDs;
-//     } catch (error) {
-//         console.error("Error fetching race IDs:", error);
-//         throw error; // Rethrow the error for handling at the higher level
-//     }
-// }
+        fetchRaceNames();
+    }, []);
 
-// const fetchRaceInfo = async () => {
-//     try {
-//         const raceIDs = await fetchRaceIDs(); // Get race IDs
-//         const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
-//         const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
+const fetchRaceIDs = async () => {
+    try {
+        // Fetch the temporary keys from storage
+        const tmpKey = await AsyncStorage.getItem('tmp_key');
+        const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+        // Fetch races using the temporary keys
+        const races = await getRegRaces(tmpKey, tmpSecret);
+        const registeredRaces = races.user_registered_races;
 
-//         // Fetch race info for all race IDs concurrently
-//         const raceInfoPromises = raceIDs.map(async race_id => {
-//             const info = await getSingleRace(tmpKey, tmpSecret, race_id);
-//             console.log(info.race.name, 'info');
-//             return [info.race.name];
-//         });
-//     } catch (error) {
-//         console.error('Error:', error);
-//         throw error;
-//     }
-// };
+        const raceIDs = registeredRaces.map(race => race.race_id);
 
-// fetchRaceInfo();
+        return raceIDs;
+    } catch (error) {
+        console.error("Error fetching race IDs:", error);
+        throw error; // Rethrow the error for handling at the higher level
+    }
+}
+
+const fetchRaceInfo = async () => {
+    try {
+        const raceIDs = await fetchRaceIDs(); // Get race IDs
+        const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
+        const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
+
+        // Fetch race info for all race IDs concurrently
+        const raceInfoPromises = raceIDs.map(async race_id => {
+            let info = await getSingleRace(tmpKey, tmpSecret, race_id);
+            let raceName = info.race.name;
+            // console.log(raceName);
+            return raceName; 
+        });
+
+        // Wait for all promises to resolve
+        const raceNames = await Promise.all(raceInfoPromises);
+
+        return raceNames;
+    } catch (error) {
+        console.error('Error:', error);
+        throw error;
+    }
+};
+
 
 const fetchRaces = async () => {
     try {
         const tmpKey = await AsyncStorage.getItem('tmp_key');
         const tmpSecret = await AsyncStorage.getItem('tmp_secret');
         const races = await getRaces(tmpKey, tmpSecret);
-        console.log(races);
+        // console.log(races)
     }
     catch (error) {
         console.error('Error:', error);
@@ -124,11 +161,11 @@ return (
 
             <Text style={styles.welcomeText}>Welcome, {firstName}!</Text>
             <View style={styles.line} />
-            <ScrollView>
+            <BasicDropdown title='Select race' data={raceNames}/>
+            {/* <ScrollView>
                 <Text>This is a test</Text>
 
-            </ScrollView>
-
+            </ScrollView> */}
             <View style={styles.bottomLayer}>
 
                 <View style={styles.galleryButton} />
@@ -147,12 +184,15 @@ return (
                     color="black"
                     style = {styles.liveButton} />
             </View>
-        
 
         </SafeAreaView>
 
     );
 }
+
+// when user selects a race, store the selected race
+// from race, search through albums
+
 
 
 const styles = StyleSheet.create({
@@ -187,7 +227,7 @@ const styles = StyleSheet.create({
         height: 190,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 125,
+        marginTop: -200, // Temporary fix for logo position
     },
     textLogo: {
         width: 160,
@@ -240,3 +280,6 @@ const styles = StyleSheet.create({
 
 
 export default Homepage;
+
+
+
