@@ -124,7 +124,18 @@ const Album = () => {
         <ScrollView style={styles.scrollView}>
             <PhotoButton style = {styles.photos}
                 defaultButtonText = 'Photo (photo id)'
-                photo={TestPhoto}
+                photo={require('../../assets/images/1.png')}
+                name = "Test 1"
+            />
+            <PhotoButton style = {styles.photos}
+                defaultButtonText = 'Photo (photo id)'
+                photo={require('../../assets/images/TestPhoto2.jpeg')}
+                name = "Test 2"
+            />
+            <PhotoButton style = {styles.photos}
+                defaultButtonText = 'Photo (photo id)'
+                photo={require('../../assets/images/TestPhoto3.jpeg')}
+                name = "Test 3"
             />
         </ScrollView>
         {/*<FlatList>
