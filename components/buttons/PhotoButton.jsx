@@ -13,19 +13,21 @@ const viewPhoto = () => (
     </PhotoProvider>*/ }
 )
 
+ 
 const PhotoButton = (photo, name) => (
     <TouchableOpacity style={styles.container}>
-                 <Image style={styles.photo} source={photo} size={52} onPress={viewPhoto} />
-                 <Text>Photo {name}</Text>
+        <Image style={styles.photo} source={photo} size={52} onPress={viewPhoto} />
+                 {/*<Image style={styles.photo} source={photo} size={52} onPress={viewPhoto} />
+                 <Text>Photo {name}</Text>*/}
     </TouchableOpacity>
-    
+
 )
 
 const styles = StyleSheet.create({ 
     container: {
         paddingVertical: 15,
         paddingHorizontal: 25,
-        marginTop: 85,
+        marginTop: 25,
         borderColor: 'orange',
         borderWidth: 5,
         alignItems: 'center',

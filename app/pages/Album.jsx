@@ -23,73 +23,9 @@ const goToHomePage = () => {
 /*Some dummy information for now*/
 const albums = ["8/13/1942", "5/7/1996", "8/24/2003"]
 
-const photos = {
-	"photos": [
-		{
-			"photo_id": 1,
-			"album_id": 21,
-			"race_event_days_id": 6568,
-			"bibs": [
-				1179
-			],
-			"original": {
-				"image_url": "https:\/\/rsu-photos-v2-v2prod.s3.amazonaws.com\/customOriginal_v3\/race_21_6568_d375c60e-ba56-49b5-8812-82b597eef456.jpg",
-				"height": 1067,
-				"width": 1600
-			},
-			"thumbnail": {
-				"image_url": "https:\/\/rl13photo5788d40734058.s3.amazonaws.com\/thumbs_v2\/race_21_6568_d375c60e-ba56-49b5-8812-82b597eef456.jpg",
-				"height": 200,
-				"width": 300
-			},
-			"large": {
-				"image_url": "https:\/\/rsu-photos-v2-v2prod.s3.amazonaws.com\/large_watermarked_v3\/race_21_6568_d375c60e-ba56-49b5-8812-82b597eef456.jpg",
-				"height": 600,
-				"width": 900
-			},
-			"uploaded_filename": "myPhoto.jpg",
-			"uploaded_ts": 1593547220
-		},
-		{
-			"photo_id": 41,
-			"album_id": 21,
-			"race_event_days_id": 6827,
-			"bibs": [
-				1145,
-				1308,
-				1425
-			],
-			"original": {
-				"image_url": "https:\/\/rl13photo5788d40734058.s3.amazonaws.com\/original_v2\/race_21_6568_d35026d1-3ad0-4e77-a374-ae95c0582c25.jpg",
-				"height": 1200,
-				"width": 1062
-			},
-			"thumbnail": {
-				"image_url": "https:\/\/rl13photo5788d40734058.s3.amazonaws.com\/thumbs_v2\/race_21_6568_d35026d1-3ad0-4e77-a374-ae95c0582c25.jpg",
-				"height": 300,
-				"width": 266
-			},
-			"large": {
-				"image_url": "https:\/\/rsu-photos-v2-v2prod.s3.amazonaws.com\/large_watermarked_v3\/race_21_6568_d35026d1-3ad0-4e77-a374-ae95c0582c25.jpg",
-				"height": 900,
-				"width": 797
-			},
-			"uploaded_filename": "myPhoto2.jpg",
-			"uploaded_ts": 1593547222
-		}
-	]
-}
+const images = require.context('../../assets/images', true);
+const imageList = images.keys().map(image => images(image));
 
-{/*const renderPhoto = ({}) => {
-    return (
-    <View style={styles.photos}>
-        <PhotoButton 
-        photo={TestPhoto}
-        onPress={() => setSelectedId(photos.photo.id)}
-        ></PhotoButton>
-        <Text>{photos.photos.photo_id}</Text>
-    </View>
-    )}*/}
 const Album = () => {
     const [settingsModalVisible, setSettingsModalVisible] = useState(false);
     const [statusModalVisible, setStatusModalVisible] = useState(false)
@@ -122,22 +58,27 @@ const Album = () => {
         {/*Written by Ahmed*/}
 
         <ScrollView style={styles.scrollView}>
-            <PhotoButton style = {styles.photos}
+
+        {imageList.map((image, index) => (
+        <PhotoButton key={index} photo={image.default} alt={`image-${index}`} />
+      ))}
+            {/*<PhotoButton style = {styles.photos}
                 defaultButtonText = 'Photo (photo id)'
-                photo={require('../../assets/images/1.png')}
+                photo={'1.png'}
                 name = "Test 1"
             />
             <PhotoButton style = {styles.photos}
                 defaultButtonText = 'Photo (photo id)'
-                photo={require('../../assets/images/TestPhoto2.jpeg')}
+                photo={'TestPhoto2.jpeg'}
                 name = "Test 2"
             />
             <PhotoButton style = {styles.photos}
                 defaultButtonText = 'Photo (photo id)'
-                photo={require('../../assets/images/TestPhoto3.jpeg')}
+                photo={'TestPhoto3.jpeg'}
                 name = "Test 3"
-            />
+            />*/}
         </ScrollView>
+
         {/*<FlatList>
             numColumns={1}
             data={photos}
