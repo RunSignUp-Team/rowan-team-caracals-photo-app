@@ -16,6 +16,9 @@ import BasicTextInput from '../../components/BasicTextInput';
 import getRegRaces from '../GetRegRaces';
 import getSingleRace from '../GetSingleRace';
 import getRaces from '../GetRaces';
+import AddAlbumButton from '../../components/buttons/AddAlbumButton';
+import AddAlbumModel from '../../components/AddAlbumModal';
+import BottomLayer from '../../components/BottomLayer';
 
 //import Ionicons from '@expo/vector-icons/Ionicons';
 
@@ -26,6 +29,7 @@ const Homepage = () => {
 
 const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 const [statusModalVisible, setStatusModalVisible] = useState(false);
+const [addAlbumModalVisible, setAddAlbumModalVisible] = useState(false);
 
 const [firstName, setFirstName] = useState('');
 
@@ -101,15 +105,18 @@ return (
             <View style = {styles.settings_button}>
                 <SettingsButton onPress={() => setSettingsModalVisible(true)}/>
             </View>
+            
             <SettingsModal
                    modalVisible={settingsModalVisible}
                    setModalVisible={setSettingsModalVisible}>
             </SettingsModal>
+            
             <StatusModal
                    modalVisible={statusModalVisible}
                    setModalVisible={setStatusModalVisible}>
             </StatusModal>
-           <StatusButton
+            
+            <StatusButton
                 size={38}
                 color="black"
                 style={styles.statusButton} 
@@ -118,6 +125,7 @@ return (
             <Image
                 style={styles.circleLogo}
                 source={logoImage} />
+            
             <Image
                 style={styles.textLogo}
                 source={logoText} />
@@ -129,25 +137,21 @@ return (
 
             </ScrollView>
 
-            <View style={styles.bottomLayer}>
+            <AddAlbumModel
+                modalVisible={addAlbumModalVisible}
+                setModalVisible={setAddAlbumModalVisible} >
+            </AddAlbumModel>
 
-                <View style={styles.galleryButton} />
-                <GalleryPageButton
-                     size={42}
-                        color="black"
-                     style={styles.galleryButton} />
-
-                <CameraPageButton
-                    size={49}
-                    color="black"
-                    style = {styles.cameraButton} />
-
-                <LiveStreamButton
-                    size={46}
-                    color="black"
-                    style = {styles.liveButton} />
-            </View>
-        
+            <AddAlbumButton
+                // width={120}
+                // height={50}
+                size={38}
+                // color="black"
+                style={styles.addAlbumButton}
+                // fontFamily='SF-Pro-Text-Light'
+                onPress={() => setAddAlbumModalVisible(true)} />
+            
+            <BottomLayer />
 
         </SafeAreaView>
 
@@ -158,24 +162,9 @@ return (
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: COLORS.off_white,
+        backgroundColor: '#FEFFFB', // COLORS.off_white, '#FDFFF7',
         alignItems: 'center',
         justifyContent: 'center',
-    },
-    bottomLayer: {
-        flex: 1,
-        position: 'absolute',
-        height: 80, 
-        backgroundColor: COLORS.RSU_pink,
-        borderColor: COLORS.black,
-        borderStyle: 'solid',
-        borderTopWidth: 1,
-        width: '100%',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
-        bottom: -40,
-        marginBottom: 5,
     },
     settings_button: {
         position: 'absolute', 
@@ -196,28 +185,12 @@ const styles = StyleSheet.create({
         position: "absolute",
         top: -45,
         left: 10,
-
     },
     welcomeText: {
         alignItems: 'center',
         fontSize: 35,
         paddingTop: 10,
         fontFamily: 'SF-Pro-Text-Light',
-    },
-    galleryButton: {
-        position: 'absolute',
-        bottom: 20,
-        left: 60,
-    },
-    cameraButton: {
-        position: 'absolute', 
-        bottom: 18,
-        alignContent: "center"
-    },
-    liveButton: {
-        position: 'absolute',
-        bottom: 18,
-        right: 60,
     },
     statusButton: {
         position: 'absolute',
@@ -232,11 +205,15 @@ const styles = StyleSheet.create({
         width: '100%',
         height: 1.2,
         backgroundColor: 'black',
+    },
+    addAlbumButton: {
+        position: 'absolute',
+        top: 500,
+        right: 15,
+        padding: 2,
+        alignItems: 'center',
     }
 
-
 });
-
-
 
 export default Homepage;

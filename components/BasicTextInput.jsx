@@ -2,14 +2,16 @@ import React from "react";
 import { TextInput, Text, SafeAreaView, StyleSheet } from 'react-native'
 import { COLORS } from "../constants/Colors";
 
-const BasicTextInput = ({title, placeholder, value, setValue, secureTextEntry}) => {
+const BasicTextInput = ({title, inputHeight, inputWidth, placeholder, value, setValue, secureTextEntry}) => {
     return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>
         {title}
       </Text>
       <TextInput
-        style={styles.input}
+        style={[styles.input, inputHeight > 0 && inputWidth > 0
+                  ? {height: inputHeight, width: inputWidth} 
+                  : {}]}
         placeholder={placeholder}
         onChangeText={setValue}
         secureTextEntry={secureTextEntry}
