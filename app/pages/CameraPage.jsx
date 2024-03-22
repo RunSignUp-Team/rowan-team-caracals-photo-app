@@ -25,7 +25,7 @@ const CameraPage = () => {
 
     useEffect(() => {
         (async () => {
-          const mediaLibraryStatus= await MediaLibrary.requestPermissionsAsync();
+          const mediaLibraryStatus = await MediaLibrary.requestPermissionsAsync();
           const cameraStatus = await Camera.requestCameraPermissionsAsync();
           const audioStatus = await Camera.requestMicrophonePermissionsAsync();
           setHasMediaLibraryPermission(mediaLibraryStatus.status === 'granted');
@@ -39,10 +39,14 @@ const CameraPage = () => {
             try{
                 const data = await cameraRef.current.takePictureAsync();
                 console.log(data);
-                if(quickCam) {
-                    await MediaLibrary.createAssetAsync(data.uri);
+                if(!hasMediaLibraryPermission) {
+                    alert("Permission to save photos is currently not granted. Please enable the option in your phone's settings")
                 } else {
-                    setImage(data.uri);
+                    if(quickCam) {
+                        MediaLibrary.createAssetAsync(data.uri);
+                    } else {
+                        setImage(data.uri);
+                    }
                 }
             } catch(e) {
                 console.log(e);
