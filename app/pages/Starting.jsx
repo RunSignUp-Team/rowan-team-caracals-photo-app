@@ -14,6 +14,10 @@ import BasicDropdown from "../../components/BasicDropdown";
 import TextCard from "../../components/TextCard";
 import getRegRaces from "../GetRegRaces";
 import getSingleRace from "../GetSingleRace";
+import Authorize from "../Authorize";
+import Authpage from "./Authpage";
+import AuthTest from "./AuthTest";
+import * as Linking from 'expo-linking';
 
 
  // TODO: Fix inconsistancy between iOS and Android BasicButton button location
@@ -26,11 +30,14 @@ const Starting = () => {
         <View style={styles.container}>
             {/* <BasicModal message={'This is a test'}></BasicModal> */}
             {/* <BasicOptionButton title='basic'></BasicOptionButton> */}
-            <Image
+            {/* <Image
                 style={styles.logoMedium}
                 source={logoImage}/>
             <BasicButton title={'Log-in'} fontFamily={'SF-Pro-Text-Bold'}
-                        onPress={goToLoginPage}></BasicButton>
+                        onPress={goToLoginPage}></BasicButton>  */}
+            {/* <Authorize></Authorize> */}
+            <Authpage></Authpage>
+            {/* <AuthTest></AuthTest> */}
             {/* <BasicDropdown title='Select a date'></BasicDropdown> */}
         </View>
     );}

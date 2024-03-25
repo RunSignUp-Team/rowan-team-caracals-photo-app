@@ -2,7 +2,7 @@
   "expo": {
     "name": "media-app",
     "slug": "media-app",
-    "scheme": "media-app",
+    "scheme": "run-media-up",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/brand/logo-text.png",
@@ -18,9 +18,10 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-      "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
-      "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
-      }
+        "NSCameraUsageDescription": "$(PRODUCT_NAME) needs access to your Camera.",
+        "NSMicrophoneUsageDescription": "$(PRODUCT_NAME) needs access to your Microphone."
+      },
+      "bundleIdentifier": "run-media-up-oauth"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,7 +31,8 @@
       "permissions": [
         "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.run.media.up"
     },
     "web": {
       "favicon": "./assets/brand/logo-circle.png",
@@ -40,11 +42,8 @@
       "expo-font",
       "expo-router"
     ],
-    
-      "expo-camera":
-      {
-         "cameraPermission": "Allow $(PRODUCT_NAME) to access your Camera."
-       }
-    
+    "expo-camera": {
+      "cameraPermission": "Allow $(PRODUCT_NAME) to access your Camera."
+    }
   }
 }
