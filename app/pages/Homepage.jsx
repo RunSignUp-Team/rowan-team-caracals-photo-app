@@ -14,6 +14,7 @@ import { COLORS } from "../../constants/Colors";
 import CameraPageButton from '../../components/buttons/CameraButton';
 import { useFonts } from 'expo-font';
 import BasicDropdown from '../../components/BasicDropdown';
+import SelectDropdown from "react-native-select-dropdown";
 import BasicTextInput from '../../components/BasicTextInput';
 import getRegRaces from '../GetRegRaces';
 import getSingleRace from '../GetSingleRace';
@@ -37,6 +38,12 @@ const Homepage = () => {
 const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 const [statusModalVisible, setStatusModalVisible] = useState(false);
 const [firstName, setFirstName] = useState('');
+const [dateVisible, setDateVisible] = useState(false);
+const [albumVisible, setAlbumVisible] = useState(false);
+
+const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
+const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
+const races = ["Race 1", "Race 2", "Race 3"]
 
 useEffect(() => {
     const getFirstNameFromStorage = async () => {
@@ -153,7 +160,37 @@ return (
 
             <Text style={styles.welcomeText}>Welcome, {firstName}!</Text>
             <View style={styles.line} />
-            <BasicDropdown title='Select race' data={raceNames}/>
+            <BasicDropdown 
+                title='Select race' data={raceNames}
+                onSelect={() => {
+                    setDateVisible(true)
+                }}
+            />
+
+            {
+                    dateVisible ? <SelectDropdown
+                
+                defaultButtonText = 'Select a date'
+                data = {dates}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                    setAlbumVisible(true)
+                }}
+            /> : null
+            }
+
+            {
+                albumVisible ?
+            
+            <SelectDropdown
+                defaultButtonText = 'Select an album'
+                data = {albums}
+                onSelect={(selectedItem, index) => {
+                    console.log(selectedItem, index)
+                }}
+            /> : null
+            }
+
             {/* <ScrollView>
                 <Text>This is a test</Text>
 
