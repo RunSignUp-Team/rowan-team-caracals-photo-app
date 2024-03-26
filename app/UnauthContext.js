@@ -1,38 +1,29 @@
-async function logout(tmp_key, tmp_secret) {
-    const url = 'https://test3.runsignup.com/rest/logout';
-    const params = new URLSearchParams({
-        format: 'json',
-        tmp_key: tmp_key,
-        tmp_secret: tmp_secret
-    });
-
-    const formData = new FormData();
-    formData.append('tmp_key', tmp_key);
-    formData.append('tmp_secret', tmp_secret);
-
-    try {
-        const response = await fetch(`${url}?${params.toString()}`, {
+async function logout(accessToken) {
+        const revocationEndpoint = 'https://test3.runsignup.com/Rest/v2/auth/auth-code-redemption.json'; // Replace with the actual revocation endpoint
+      
+        const params = new URLSearchParams();
+        params.append('token', accessToken);
+        params.append('token_type_hint', 'access_token');
+      
+        try {
+          const response = await fetch(revocationEndpoint, {
             method: 'POST',
-            body: formData,
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              // Add any necessary authentication headers
+            },
+            body: params,
+          });
+      
+          if (response.ok) {
+            console.log('Access token revoked successfully');
+            return true;
+          } else {
+            console.error('Failed to revoke access token');
+          }
+        } catch (error) {
+          console.error('Error revoking access token:', error);
         }
-
-        const responseText = await response.json();
-
-        if (responseText.error) {
-            throw new Error(responseText.error.error_msg);
-        }
-
-        // console.log('Request successful. JSON:');
-        // console.log(responseText);
-
-        return responseText;
-    } catch (error) {
-        throw new Error('Logout failed');
-    }
-}
-
+      };
+    
 export default logout;

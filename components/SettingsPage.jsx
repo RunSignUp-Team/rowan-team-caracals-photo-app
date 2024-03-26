@@ -7,6 +7,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router } from "expo-router";
 import { useFonts } from "expo-font";
 
+
 export default function SettingsPage ({ modalVisible, setModalVisible, message }) {
     const [loaded] = useFonts({
         'SF-Pro-Display-Regular': require('../assets/fonts/SF-Pro-Display-Regular.otf'),
@@ -20,6 +21,7 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [isActive, setIsActive] = useState(false);
+    const [accessToken, setAccessToken] = useState('');
 
     useEffect(() => {
         const getFirstandLastNameFromStorage = async () => {
@@ -37,22 +39,36 @@ export default function SettingsPage ({ modalVisible, setModalVisible, message }
         getFirstandLastNameFromStorage();
     }, []);
 
+    useEffect(() => { 
+    const getAccessToken = async () => {
+        try {
+            const accessToken = await AsyncStorage.getItem('accessToken');
+            if (accessToken) {
+                setAccessToken(accessToken);
+            }
+        } catch (error) {
+            console.error('Could not retrieve access token from storage:', error);
+        }
+    };
+    getAccessToken();
+}, []);
+
+
     const handleLogout = async () => {
-        const tmpKey = await AsyncStorage.getItem('tmp_key');
-        const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+        // const tmpKey = await AsyncStorage.getItem('tmp_key');
+        // const tmpSecret = await AsyncStorage.getItem('tmp_secret');
         
-        if (tmpKey && tmpSecret) {
-            const logoutSuccess = await logout(tmpKey, tmpSecret);
-            console.log('Logout success:', logoutSuccess);
+        if (accessToken) {
+            const logoutSuccess = await logout(accessToken);
             
             if (logoutSuccess) {
                 // console.log('Logout successful');
-                router.navigate('pages/Starting');
+                router.navigate('pages/Authpage');
             } else {
                 console.log('Logout failed');
             }
         } else {
-            console.log('Temporary keys not found');
+            console.log('Access Token not found you doofus');
         }
     };
 

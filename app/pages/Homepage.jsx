@@ -29,6 +29,8 @@ const logoText = require('../../assets/brand/logo-text.png')
 const Homepage = () => {
     const [loaded] = useFonts({
         'SF-Pro-Text-Light': require('../../assets/fonts/SF-Pro-Text-Light.otf'),
+        'SF-Pro-Text-Bold': require('../../assets/fonts/SF-Pro-Text-Bold.otf'),
+        'SF-Pro-Text-Light': require('../../assets/fonts/SF-Pro-Text-Light.otf'),
       });
       if (!loaded) {
         return null;
@@ -36,6 +38,7 @@ const Homepage = () => {
     
 const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 const [statusModalVisible, setStatusModalVisible] = useState(false);
+
 const [firstName, setFirstName] = useState('');
 
 useEffect(() => {
@@ -51,6 +54,7 @@ useEffect(() => {
     };
     getFirstNameFromStorage();
 }, []);
+
 
 const [raceNames, setRaceNames] = useState([]);
 
