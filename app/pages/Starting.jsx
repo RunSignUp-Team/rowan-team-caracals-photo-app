@@ -14,7 +14,6 @@ import BasicDropdown from "../../components/BasicDropdown";
 import TextCard from "../../components/TextCard";
 import getRegRaces from "../GetRegRaces";
 import getSingleRace from "../GetSingleRace";
-import Authorize from "../Authorize";
 import Authpage from "./Authpage";
 import AuthTest from "./AuthTest";
 import * as Linking from 'expo-linking';

@@ -1,15 +1,18 @@
-async function getSingleRace(tmp_key, tmp_secret, race_id) {
+async function getSingleRace(access_token, race_id) {
     const url = 'https://test3.runsignup.com/rest/race/:race_id';
     const params = new URLSearchParams({
-        tmp_key: tmp_key,
-        tmp_secret: tmp_secret,
         race_id: race_id,
         format: 'json'
     });
-    
+
+    const headers = {
+        'Authorization': `Bearer ${access_token}`,
+    }
+
     try {
         const response = await fetch(`${url}?${params}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: headers,
         });
         
         if (!response.ok) {

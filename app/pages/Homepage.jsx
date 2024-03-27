@@ -38,7 +38,6 @@ const Homepage = () => {
     
 const [settingsModalVisible, setSettingsModalVisible] = useState(false);
 const [statusModalVisible, setStatusModalVisible] = useState(false);
-
 const [firstName, setFirstName] = useState('');
 
 useEffect(() => {
@@ -63,13 +62,13 @@ const [raceNames, setRaceNames] = useState([]);
             try {
                 const raceNames = await fetchRaceInfo();
                 // Test Info
-                raceNames.push('Test Race Name');
-                raceNames.push('Another Test Race');
-                raceNames.push('Sloth Race');
-                raceNames.push('The Professor Myers Race');
-                raceNames.push('The Fun Group Run');
-                raceNames.push('The 5k');
-                raceNames.push('The 10k');
+                // raceNames.push('Test Race Name');
+                // raceNames.push('Another Test Race');
+                // raceNames.push('Sloth Race');
+                // raceNames.push('The Professor Myers Race');
+                // raceNames.push('The Fun Group Run');
+                // raceNames.push('The 5k');
+                // raceNames.push('The 10k');
                 setRaceNames(raceNames);
             } catch (error) {
                 console.error('Error fetching race names:', error);
@@ -82,10 +81,11 @@ const [raceNames, setRaceNames] = useState([]);
 const fetchRaceIDs = async () => {
     try {
         // Fetch the temporary keys from storage
-        const tmpKey = await AsyncStorage.getItem('tmp_key');
-        const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+        // const tmpKey = await AsyncStorage.getItem('tmp_key');
+        // const tmpSecret = await AsyncStorage.getItem('tmp_secret');
+        const access_token = await AsyncStorage.getItem('accessToken');
         // Fetch races using the temporary keys
-        const races = await getRegRaces(tmpKey, tmpSecret);
+        const races = await getRegRaces(access_token);
         const registeredRaces = races.user_registered_races;
 
         const raceIDs = registeredRaces.map(race => race.race_id);
@@ -100,12 +100,13 @@ const fetchRaceIDs = async () => {
 const fetchRaceInfo = async () => {
     try {
         const raceIDs = await fetchRaceIDs(); // Get race IDs
-        const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
-        const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
+        // const tmpKey = await AsyncStorage.getItem('tmp_key'); // Get tmpKey
+        // const tmpSecret = await AsyncStorage.getItem('tmp_secret'); // Get tmpSecret
+        const access_token = await AsyncStorage.getItem('accessToken');
 
         // Fetch race info for all race IDs concurrently
         const raceInfoPromises = raceIDs.map(async race_id => {
-            let info = await getSingleRace(tmpKey, tmpSecret, race_id);
+            let info = await getSingleRace(access_token, race_id);
             let raceName = info.race.name;
             // console.log(raceName);
             return raceName; 
@@ -124,9 +125,8 @@ const fetchRaceInfo = async () => {
 
 const fetchRaces = async () => {
     try {
-        const tmpKey = await AsyncStorage.getItem('tmp_key');
-        const tmpSecret = await AsyncStorage.getItem('tmp_secret');
-        const races = await getRaces(tmpKey, tmpSecret);
+        const accessToken = await AsyncStorage.getItem('accessToken');
+        const races = await getRaces(accessToken);
         // console.log(races)
     }
     catch (error) {
@@ -166,10 +166,7 @@ return (
             <Text style={styles.welcomeText}>Welcome, {firstName}!</Text>
             <View style={styles.line} />
             <BasicDropdown title='Select race' data={raceNames}/>
-            {/* <ScrollView>
-                <Text>This is a test</Text>
-
-            </ScrollView> */}
+            <BasicDropdown title='Select album'/>
             <View style={styles.bottomLayer}>
 
                 <View style={styles.galleryButton} />

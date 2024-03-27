@@ -11,6 +11,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { COLORS } from '../../constants/Colors';
 import { LinearGradient } from 'expo-linear-gradient';
+// import { Animated, useSharedValue } from 'react-native-reanimated';
 
 WebBrowser.maybeCompleteAuthSession();
 const REDIRECT_URI = AuthSession.makeRedirectUri();
@@ -19,11 +20,13 @@ const CLIENT_ID = process.env.EXPO_PUBLIC_CLIENT_ID;
 const CLIENT_SECRET = process.env.EXPO_PUBLIC_CLIENT_SECRET;
 // console.log(CLIENT_ID);
 // console.log(CLIENT_SECRET);
+console.log(REDIRECT_URI);
 // Test Values
 // const CODE_CHALLENGE = 'zf30Cs0LaINkkPH-9S3KO_QCkePE9E9tp2gBzLfqRwA';
 // const CODE_VERIFIER = '2cF_l9RECAiP8gBSa6KUabn31PrXrC8YLWqu5RC-dvU';
 // const AUTH_URL = 'https://test3.runsignup.com/Profile/OAuth2/RequestGrant'; 
 // const TOKEN_URL = 'https://test3.runsignup.com/Rest/v2/auth/auth-code-redemption.json';
+
 
 const Authpage = () => {
   const [authCode, setAuthCode] = useState(null);
@@ -40,11 +43,19 @@ const Authpage = () => {
     return null;
   }
 
+  // const opacity = useSharedValue(0);
+  
+  // useEffect(() => {
+  //   opacity.value = withTiming(1, {
+  //     duration: 2000, // Adjust the duration as needed
+  //     easing: Easing.linear, // Adjust the easing function as needed
+  //   });
+  // }, []);
+
   const discovery = {
     authorizationEndpoint: 'https://test3.runsignup.com/Profile/OAuth2/RequestGrant',
     tokenEndpoint: 'https://test3.runsignup.com/Rest/v2/auth/auth-code-redemption.json',
   };
-
   const [request, response, promptAsync] = AuthSession.useAuthRequest({
     responseType: 'code',
     clientId: CLIENT_ID,
@@ -130,6 +141,12 @@ const Authpage = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.background}>
+        {/* <Animated.View 
+        style={[
+            styles.circleContainer,
+            {opacity: opacity.value,},
+          ]}
+        > */}
       <LinearGradient 
         colors={['rgba(239, 79, 157, .9)', 'rgba(239, 79, 157, 0)', 'transparent']} //
         start={[.9, 0]}
@@ -140,6 +157,7 @@ const Authpage = () => {
         start={[.9, 0]} 
         end={[0.02, 0]}
         style={styles.circle2} />
+      {/* </Animated.View> */}
       </View>
       <Image style={styles.logo} source={logoImage} />
       <View style={styles.textContainer}>
@@ -168,6 +186,9 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     backgroundColor: COLORS.off_white,
+  },
+  circleContainer: {
+    overflow: 'hidden',
   },
   circle1: {
     position: 'absolute',

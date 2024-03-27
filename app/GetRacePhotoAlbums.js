@@ -1,9 +1,13 @@
-async function getRaces(access_token) {
-    const url = 'https://test3.runsignup.com/rest/races';
+import { get } from "react-native/Libraries/TurboModule/TurboModuleRegistry";
+
+async function getRacePhotoAlbums(access_token, race_id, race_event_days_id) {
+    const url = 'https://test3.runsignup.com/rest/v2/photos/get-race-photo-albums.json';
     const params = new URLSearchParams({
+        race_id: race_id,
+        race_event_days_id: race_event_days_id,
         format: 'json'
     });
-    
+
     const headers = {
         'Authorization': `Bearer ${access_token}`,
     }
@@ -19,11 +23,10 @@ async function getRaces(access_token) {
         }
 
         const responseData = await response.json();
-        return responseData.races;
+        return responseData;
     } catch (error) {
         console.error('Error:', error);
     }
 }
 
-export default getRaces;
-
+export default getRacePhotoAlbums;

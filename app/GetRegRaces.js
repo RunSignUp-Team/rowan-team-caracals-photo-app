@@ -1,14 +1,18 @@
-async function getRegRaces(tmp_key, tmp_secret) {
+async function getRegRaces(access_token) {
     const url = 'https://test3.runsignup.com/rest/user/registered-races';
     const params = new URLSearchParams({
-        tmp_key: tmp_key,
-        tmp_secret: tmp_secret,
         format: 'json'
     });
 
+    const headers = {
+        'Authorization': `Bearer ${access_token}`,
+    }
+
+
     try {
         const response = await fetch(`${url}?${params}`, {
-            method: 'GET'
+            method: 'GET',
+            headers: headers,
         });
 
         if (!response.ok) {
