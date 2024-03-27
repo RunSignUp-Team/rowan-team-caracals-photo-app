@@ -1,6 +1,7 @@
 async function getPhotoCredentials(access_token, race_id, race_event_days_id, album_id) {
     const url = 'https://test3.runsignup.com/rest/v2/photos/get-race-photo-upload-credentials.json';
     const params = new URLSearchParams({
+        access_token: access_token,
         race_id: race_id,
         race_event_days_id: race_event_days_id,
         album_id: album_id,
@@ -27,3 +28,5 @@ async function getPhotoCredentials(access_token, race_id, race_event_days_id, al
         console.error('Error:', error);
     }
 }
+
+export default getPhotoCredentials;
