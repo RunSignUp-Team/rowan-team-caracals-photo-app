@@ -40,6 +40,7 @@ const [statusModalVisible, setStatusModalVisible] = useState(false);
 const [firstName, setFirstName] = useState('');
 const [dateVisible, setDateVisible] = useState(false);
 const [albumVisible, setAlbumVisible] = useState(false);
+const [albumSelectedMessageVisible, setAlbumSelectedMessageVisible] = useState(false);
 
 const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
 const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
@@ -208,8 +209,13 @@ return (
                 data = {albums}
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index)
+                   setAlbumSelectedMessageVisible(true)
                 }}
             /> : null
+            }
+
+            {
+                albumSelectedMessageVisible ? <Text style={styles.album_message}>You have selected an album!</Text> : null
             }
 
             {/* <ScrollView>
@@ -271,6 +277,15 @@ const styles = StyleSheet.create({
         position: 'absolute', 
         top: -14, 
         right: 10, 
+    },
+    album_message: {
+        //position: 'absolute', 
+        color: "green",
+        //   width: 250,
+         //  height: 700,
+        fontSize: 20,
+        marginTop: 20,
+        paddingTop: 15,
     },
     circleLogo: {
         width: 190,
@@ -348,7 +363,7 @@ const styles = StyleSheet.create({
     selectedRowTextStyle: {
         color: COLORS.off_white,
     }
-    
+
 });
 
 
