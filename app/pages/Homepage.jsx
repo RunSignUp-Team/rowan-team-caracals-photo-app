@@ -42,6 +42,9 @@ const [dateVisible, setDateVisible] = useState(false);
 const [albumVisible, setAlbumVisible] = useState(false);
 const [albumSelectedMessageVisible, setAlbumSelectedMessageVisible] = useState(false);
 
+const [nextDate, setNextDate] = useState('');
+const [lastDate, setLastDate] = useState('');
+
 const dates = ["8/13/1942", "5/7/1996", "8/24/2003"]
 const albums = ["Animals", "Led Zepplin IV", "Ok Computer"]
 const races = ["Race 1", "Race 2", "Race 3"]
@@ -104,6 +107,15 @@ const fetchRaceInfo = async () => {
             let info = await getSingleRace(tmpKey, tmpSecret, race_id);
             let raceName = info.race.name;
             // console.log(raceName);
+            // console.log(info.race.next_date)
+            // console.log(info.race.last_date)
+            
+            const nextDate = info.race.next_date;
+            const lastDate = info.race.last_date;
+
+            setNextDate(nextDate);
+            setLastDate(lastDate);
+
             return raceName; 
         });
 
@@ -193,7 +205,7 @@ return (
                     dateVisible ? <SelectDropdown
                 
                 defaultButtonText = 'Select a date'
-                data = {dates}
+                data = {lastDate ? [nextDate, lastDate] : [nextDate]}
                 onSelect={(selectedItem, index) => {
                     console.log(selectedItem, index)
                     setAlbumVisible(true)
